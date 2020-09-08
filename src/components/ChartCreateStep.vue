@@ -5,7 +5,7 @@
 
       <v-divider />
 
-      <v-stepper-step :complete="e1 > 2" step="2" editable>Name of step 2</v-stepper-step>
+      <v-stepper-step :complete="e1 > 2" step="2" editable>选择数据源</v-stepper-step>
 
       <v-divider />
 
@@ -50,10 +50,19 @@ import generateUUID from '@/utils/unique';
 
 @Component
 export default class Card extends Vue {
+  /**
+   * 步骤值
+   */
   public e1 = 1;
 
+  /**
+   * 边框值
+   */
   public borderItemValue = '无';
 
+  /**
+   * 遍历获取边框
+   */
   public get borderItem(): string[] {
     const arr: string[] = [`无`];
 

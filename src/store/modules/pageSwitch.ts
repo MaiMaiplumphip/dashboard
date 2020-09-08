@@ -8,7 +8,7 @@ type TYPE = 'isEdit' | 'isAddEchats';
 const getter: any = {};
 
 const actions: StorePageSwitchActions = {
-  setPageSwitchStatus(context: any, config: {type: TYPE; flag: boolean}): void {
+  setPageSwitchStatus(context: VUEX_CONTEXT, config: {type: TYPE; flag: boolean}): void {
     context.commit('changePageSwitchStatus', config);
   },
 };

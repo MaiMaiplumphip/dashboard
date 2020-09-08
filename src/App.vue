@@ -19,11 +19,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from '@/utils/index';
+import {Component, Vue, Watch} from '@/utils/index';
 import NavigationDrawer from '@/views/Layout/NavigationDrawer/Index.vue';
 import {namespace} from 'vuex-class';
 
 const pageSwitchStore = namespace('pageSwitch');
+const layoutStore = namespace('layout');
 
 @Component({
   components: {
@@ -44,6 +45,13 @@ export default class App extends Vue {
    */
   @pageSwitchStore.Action(`setPageSwitchStatus`)
   public setPageSwitchStatus: any;
+
+  @Watch('isEdit')
+  watchIsEdit(flag: boolean) {
+    if (!flag) {
+      console.log('保存了！！');
+    }
+  }
 }
 </script>
 

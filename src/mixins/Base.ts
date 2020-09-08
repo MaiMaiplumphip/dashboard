@@ -1,4 +1,4 @@
-import {Component, Vue, Watch} from 'vue-property-decorator';
+import {Component, Vue, Watch} from '@/utils/index';
 
 @Component
 export class CockPitVue extends Vue {}

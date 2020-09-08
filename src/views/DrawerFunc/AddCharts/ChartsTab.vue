@@ -1,6 +1,6 @@
 <template>
   <v-tabs class="flex-shrink-1" background-color="dark" color="deep-purple accent-4" right @change="tabChangeHandle">
-    <v-tab v-for="item in tabTags" :item="item.value">{{ item.label }}</v-tab>
+    <v-tab v-for="item in tabTags" :item="item.value" :key="item.value">{{ item.label }}</v-tab>
 
     <v-tab-item v-for="n in tabTags.length" :key="n">
       <keep-alive>
@@ -33,13 +33,13 @@ export default class ChartsTab extends Vue {
   /**
    * tab标签
    */
-  @ChartsTabStore.State(`tabTags`)
+  @ChartsTabStore.State('tabTags')
   public tabTags?: TabTag[];
 
   /**
    * charts示例数据
    */
-  @ChartsTabStore.State(`exampleList`)
+  @ChartsTabStore.State('exampleList')
   public exampleList?: [];
 
   /**
@@ -52,7 +52,7 @@ export default class ChartsTab extends Vue {
    */
   public get tabActiveExampleList(): Example[] {
     return (this.exampleList as Example[]).filter((item: Example) => {
-      return item.type === this.tabActiveTag;
+      return item.tabType === this.tabActiveTag;
     });
   }
 

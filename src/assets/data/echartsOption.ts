@@ -700,3 +700,10 @@ export const radar = {
     },
   ],
 };
+
+export default {
+  zzt: column,
+  zxt: line,
+  bt: pie,
+  ldt: radar,
+};

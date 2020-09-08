@@ -6,7 +6,7 @@ declare interface StorePageSwitch_State {
 }
 
 interface StorePageSwitchActions {
-  setPageSwitchStatus<T>(context: T, config: {type: BTN_TYPE; flag: boolean}): void;
+  setPageSwitchStatus(context: VUEX_CONTEXT, config: {type: BTN_TYPE; flag: boolean}): void;
 }
 
 interface StorePageSwitchMutations {

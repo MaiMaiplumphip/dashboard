@@ -215,7 +215,10 @@ const Base64 = {
   },
 };
 
-export default function generateUUID() {
+/**
+ * 随机字符串
+ */
+export default function generateUUID(): string {
   let d = new Date().getTime();
   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     const r = (d + Math.random() * 16) % 16 | 0;

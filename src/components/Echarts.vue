@@ -5,44 +5,62 @@
 <script lang="ts">
 import {Component, Prop, Vue} from '@/utils/index';
 import echarts from 'echarts';
+import {EleResize} from '@/utils/resize';
 
-@Component
+@Component({
+  components: {
+    // ECharts,
+  },
+})
 export default class Echarts extends Vue {
+  /**
+   * 图表配置
+   */
   @Prop()
   private option?: any;
 
+  /**
+   * 是否为缩略
+   */
   @Prop()
   private isBrief?: boolean;
 
+  /**
+   * echarts事例
+   */
+  private mychart = null;
+
+  /**
+   * 图表node节点
+   */
+  private resizeDiv = null;
+
+  /**
+   * 初始化图表
+   */
   public initEcharts() {
-    const worldMapContainer: any = this.$refs.echarts;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const that: any = this;
+    //使用setTimeout异步特性使图标正常加载，这是一位使用拖拽插件导致不能按顺序更新才加定时器，你使用或许不用
+    setTimeout(() => {
+      this.$nextTick(() => {
+        this.mychart = echarts.init(this.$refs.echarts);
+        this.resizeDiv = this.$refs.echarts;
+        const option = Object.assign({}, this.option);
+        if (this.isBrief) {
+          delete option?.tooltip;
+          delete option?.legend;
+          delete option?.title;
+        }
+        this.mychart.setOption(option);
 
-    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-    const resizeWorldMapContainer = function() {
-      worldMapContainer.style.width = worldMapContainer?.parentNode.innerWidth + 'px';
-      worldMapContainer.style.height = worldMapContainer?.parentNode.innerHeight + 'px';
-    };
-    //设置容器高宽
-    resizeWorldMapContainer();
-
-    const myChart: any = echarts.init(this.$refs.echarts);
-    // 绘制图表
-
-    const option: any = Object.assign({}, this.option);
-
-    if (this.isBrief) {
-      delete option?.tooltip;
-      delete option?.legend;
-      delete option?.title;
-    }
-
-    myChart.setOption(option);
-
-    window.onresize = function() {
-      //重置容器高宽
-      resizeWorldMapContainer();
-      myChart.resize();
-    };
+        //重点这两句监听使用resize方法
+        const listener = function() {
+          that.mychart.resize();
+        };
+        EleResize.on(this.resizeDiv, listener);
+      });
+    }, 0);
   }
 
   public mounted() {
