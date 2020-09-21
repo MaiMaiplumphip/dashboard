@@ -7,7 +7,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/Cockpit/Index.vue'),
+    component: () => import('@/views/Cockpit/Index.vue') as any,
   },
 ];
 

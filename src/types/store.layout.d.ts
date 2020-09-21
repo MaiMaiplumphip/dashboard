@@ -12,7 +12,8 @@ declare interface LayoutItem {
   w: number; // 标识栅格元素的初始宽度，值为colWidth的倍数。
   h: number; // 标识栅格元素的初始高度，值为rowHeight的倍数.
   borderType?: string; // 边框类型
-  chartType?: string; // 图表类型
+  componentType?: COMPONENT_TYPE; // 图表类型
+  echartId: number | string | undefined;
   tabType?: CHART_TAB_TYPE; // 图表组件类型
   data?: {}; // 图表内的数据
   minW?: number; // 栅格元素的最小宽度，值为colWidth的倍数。如果w小于minW，则minW的值会被w覆盖。

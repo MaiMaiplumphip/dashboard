@@ -3,19 +3,16 @@ const state: StorePageSwitch_State = {
   isAddEchats: false,
 };
 
-type TYPE = 'isEdit' | 'isAddEchats';
-
-const getter: any = {};
+const getter = {};
 
 const actions: StorePageSwitchActions = {
-  setPageSwitchStatus(context: VUEX_CONTEXT, config: {type: TYPE; flag: boolean}): void {
+  setPageSwitchStatus(context, config): void {
     context.commit('changePageSwitchStatus', config);
   },
 };
 
 const mutations: StorePageSwitchMutations = {
-  changePageSwitchStatus(state: StorePageSwitch_State, config: {type: TYPE; flag: boolean}): void {
-    // @ts-ignore
+  changePageSwitchStatus(state: StorePageSwitch_State, config): void {
     state['is' + config.type] = config.flag;
   },
 };

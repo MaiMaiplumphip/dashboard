@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from '@/utils/index';
+import {Component, Vue} from 'vue-property-decorator';
 import BottomSheet from '@/components/BottomSheet.vue';
 import ChartsTable from '@/views/DrawerFunc/AddCharts/ChartsTab.vue';
 

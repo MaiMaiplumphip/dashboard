@@ -14,13 +14,13 @@
       style="width: 100%;height: 100%"
     >
       <GridItem v-for="item in layoutList" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" class="gridItemBox">
-        <span class="removeBtn">
+        <span class="removeBtn" v-if="isEdit" @click="removeLayoutItem(item)">
           <v-btn class="mx-2" fab dark small color="primary">
             <v-icon dark>mdi-minus</v-icon>
           </v-btn>
         </span>
         <component :is="item.borderType" style="width: 100%;height: 100%;" class="a" title="13">
-          <component :is="item.tabType" :option="echartsOption[item.chartType]" />
+          <component :is="item.componentType" :option="item.componentType === 'v-echarts' ? echartsOption[item.tabType][item.echartId - 1].option : item.option || item.data" />
         </component>
       </GridItem>
     </GridLayout>
@@ -28,11 +28,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from '@/utils/index';
+import {Component, Vue, Watch} from 'vue-property-decorator';
 import VueGridLayout from 'vue-grid-layout';
 import {namespace} from 'vuex-class';
 
-import echartsOption from '@/assets/data/echartsOption';
+import echartsOption from '@/assets/data/echartsOption/index';
 
 const pageSwitchStore = namespace('pageSwitch');
 const layoutStore = namespace('layout');
@@ -56,6 +56,9 @@ export default class App extends Vue {
   @layoutStore.State('layoutItemList')
   public layoutItemList?: LayoutItem[];
 
+  @layoutStore.Action('removeLayoutItem')
+  private removeLayoutItem;
+
   /**
    * 当前现实元素
    */
@@ -66,12 +69,25 @@ export default class App extends Vue {
    */
   public echartsOption = echartsOption;
 
+  /**
+   * 重新赋值
+   */
+  private againGive() {
+    this.layoutList = this.layoutItemList as LayoutItem[];
+  }
+
+  @Watch('layoutItemList')
+  watchLayoutItemList() {
+    this.againGive();
+  }
+
   created() {
     this.$vuetify.theme.dark = true;
   }
 
   mounted() {
-    this.layoutList = this.layoutItemList as LayoutItem[];
+    this.againGive();
+    console.log(this.layoutList);
   }
 }
 </script>

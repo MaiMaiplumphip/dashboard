@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="400">
-    <component :is="info.tabType" :config="info.config || {}" :option="info.option || {}" class="cardComponent" :style="info.style || {margin: '0 auto'}" :isBrief="true" />
+    <component :is="info.componentType" :option="info.option || {}" class="cardComponent" :style="info.style || {margin: '0 auto'}" :isBrief="true" />
 
     <v-card-title class="chartCardTitle">{{ info.title }}</v-card-title>
 
@@ -20,28 +20,25 @@
           <div class="d-flex">
             <component :is="borderItemValue" class="borderBox">
               <div class="echartsBox mx-2 pa-4">
-                <component :is="info.tabType" :config="info.config || {}" :option="info.option || {}" style="width: 600px" class="cardComponent h100p" />
+                <component :is="info.componentType" :option="info.option || {}" style="width: 600px" class="cardComponent h100p" />
               </div>
             </component>
 
-            <ChartCreateStep @borderChangeHandle="borderChangeHandleFunc" />
+            <ChartCreateStep @borderChangeHandle="borderChangeHandleFunc" :dialog="dialog" />
           </div>
 
-          <v-card-actions>
-            <v-spacer />
+          <v-card-actions class="d-flex justify-center">
             <v-btn color="error darken-1" text @click="dialogCloseHandle">关闭</v-btn>
             <v-btn color="green darken-1" text @click="dialogAddHandle">添加</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-
-      <v-btn color="orange" text>Explore</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from '@/utils/index';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import ChartCreateStep from '@/components/ChartCreateStep.vue';
 import {computeChartsParams} from '@/utils/tool';
 import {namespace} from 'vuex-class';
@@ -64,7 +61,7 @@ export default class Card extends Vue {
    * 图表添加
    */
   @layoutStore.Action('addLayoutItem')
-  public addLayoutItem: any;
+  public addLayoutItem;
 
   /**
    * 当前图表
@@ -93,7 +90,6 @@ export default class Card extends Vue {
   /**
    * 添加图表至驾驶舱
    */
-
   public dialogAddHandle() {
     const {i} = computeChartsParams(this.layoutItemList);
     const param: LayoutItem = {
@@ -104,15 +100,22 @@ export default class Card extends Vue {
       h: 4,
       tabType: this.info?.tabType,
       borderType: this.borderItemValue,
-      chartType: this.info?.echartType,
+      componentType: this.info?.componentType,
+      echartId: this.info?.echartId,
+      data: this.info?.option,
     };
+    console.log(param);
     this.addLayoutItem(param);
+
+    return this.dialogCloseHandle();
   }
 
   /**
    * 弹窗关闭回调
    */
   public dialogCloseHandle() {
+    this.borderItemValue = 'div';
+
     this.dialog = false;
   }
 }

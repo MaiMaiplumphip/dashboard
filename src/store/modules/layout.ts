@@ -2,7 +2,7 @@ const state: StoreLayout = {
   layoutItemList: [],
 };
 
-const getter: any = {};
+const getter = {};
 
 const actions: StoreLayout_Actions = {
   addLayoutItem(context: VUEX_CONTEXT, item: LayoutItem) {
@@ -15,9 +15,16 @@ const actions: StoreLayout_Actions = {
 
 const mutations: StoreLayout_Mutations = {
   changeLayoutItemList(state: StoreLayout, param) {
-    switch (param.handle) {
+    const {handle, item} = param;
+    switch (handle) {
       case 'ADD':
         state.layoutItemList.push(param.item);
+        break;
+      case 'REMOVE':
+        state.layoutItemList = state.layoutItemList.filter(layoutItem => {
+          return item.i !== layoutItem.i;
+        });
+        break;
     }
   },
 };

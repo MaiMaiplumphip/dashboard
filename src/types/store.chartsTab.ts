@@ -1,52 +1,61 @@
 /**
- * 图表Tab类型
+ * 组件类型
  */
-type CHART_TYPE =
-  | 'v-echarts'
-  | 'dv-charts'
-  | 'dv-active-ring-chart'
-  | 'dv-capsule-chart'
-  | 'dv-water-level-pond'
-  | 'dv-percent-pond'
-  | 'dv-flyline-chart'
-  | 'dv-conical-column-chart'
-  | 'dv-digital-flop'
-  | 'dv-scroll-board'
-  | 'dv-scroll-ranking-board';
+type COMPONENT_TYPE = 'v-echarts' | 'v-scroll-board' | 'v-indicator';
 
 /**
  * 图表Tab类型
  */
-type CHART_TAB_TYPE =
-  | 'v-echarts'
-  | 'dv-charts'
-  | 'dv-active-ring-chart'
-  | 'dv-capsule-chart'
-  | 'dv-water-level-pond'
-  | 'dv-percent-pond'
-  | 'dv-flyline-chart'
-  | 'dv-conical-column-chart'
-  | 'dv-digital-flop'
-  | 'dv-scroll-board'
-  | 'dv-scroll-ranking-board';
+type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb';
 
 interface TabTag {
   label: string;
-  value: string;
+  value: CHART_TAB_TYPE;
 }
 
 /**
  * 图表示例
  */
 interface Example {
+  /**
+   * 图表id
+   */
+  echartId?: string | number;
+
+  /**
+   * 组件类型
+   */
+  componentType: COMPONENT_TYPE;
+
+  /*
+   * tab类型
+   */
   tabType: CHART_TAB_TYPE;
+
+  /**
+   * 标题
+   */
   title: string;
+
+  /**
+   * 副标题
+   */
   subtitle: string;
+
+  /**
+   * 描述
+   */
   introduce: string;
-  config?: any;
+
+  /**
+   * 图表配置
+   */
   option?: any;
+
+  /**
+   * 样式
+   */
   style?: any;
-  echartType?: string;
 }
 
 interface StoreChartsTab {

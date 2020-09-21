@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from '@/utils/index';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 
 import AddChart from '@/views/DrawerFunc/AddCharts/Index.vue';
 import SystemConfig from '@/views/DrawerFunc/SystemConfig/Index.vue';

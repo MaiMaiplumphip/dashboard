@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Watch, Vue} from '@/utils/index';
+import {Component, Prop, Watch, Vue} from 'vue-property-decorator';
 
 @Component
 export default class NavigationDrawer extends Vue {

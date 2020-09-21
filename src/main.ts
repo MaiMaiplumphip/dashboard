@@ -6,14 +6,25 @@ import store from './store';
 import vuetify from '@/plugins/vuetify';
 import dataV from '@jiaminghi/data-view';
 
-import Echarts from '@/components/Echarts.vue';
+import Echarts from '@/components/Echarts';
+import ScrollBoard from '@/components/ScrollBoard';
+import Indicator from '@/components/Indicator';
+import SvgIcon from '@/components/SvgIcon';
+
 import '@/assets/style/index.sass';
 
 Vue.config.productionTip = true;
+const requireAll = requireContext => requireContext.keys().map(requireContext);
+const req = require.context('./assets/icons/svg', false, /\.svg$/);
+requireAll(req);
 
-Vue.use(dataV);
+Vue.use(<any>dataV);
 
+// 注册到全局
+Vue.component('svg-icon', SvgIcon);
 Vue.component('v-echarts', Echarts);
+Vue.component('v-scroll-board', ScrollBoard);
+Vue.component('v-indicator', Indicator);
 
 new Vue({
   router,

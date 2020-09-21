@@ -1,3 +1,14 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const productionGzipExtensions = ['js', 'css'];
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 module.exports = {
   publicPath: './', // 部署应用时的根路径(默认'/'),也可用相对路径(存在使用限制)
   outputDir: 'dist', // 运行时生成的生产环境构建文件的目录(默认''dist''，构建之前会被清除)
@@ -32,7 +43,7 @@ module.exports = {
     open: true, //配置自动启动浏览器
     proxy: {
       '/api': {
-        target: 'https://sandbox.ele-cloud.com/fatsapi',
+        target: 'http://10.1.1.128:18080',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/',
@@ -44,4 +55,41 @@ module.exports = {
     // 第三方插件配置
   },
   transpileDependencies: ['vuetify', 'vue-echarts', 'resize-detector'],
+  chainWebpack: config => {
+    const miniCssExtractPlugin = new MiniCssExtractPlugin({
+      filename: 'assets/[name].[hash:8].css',
+      chunkFilename: 'assets/[name].[hash:8].css',
+    });
+    config.plugin('extract-css').use(miniCssExtractPlugin);
+    config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin);
+    config.module.rules.delete('svg'); //重点:删除默认配置中处理svg,
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/assets/icons'))
+      .end();
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/assets/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]',
+      })
+      .end();
+  },
+  configureWebpack: {
+    plugins: [
+      // Ignore all locale files of moment.js
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // 配置compression-webpack-plugin压缩
+      new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+    ],
+  },
 };

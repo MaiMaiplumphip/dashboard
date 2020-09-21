@@ -15,5 +15,5 @@ interface StorePageSwitchMutations {
    * @param state store
    * @param config type 开关key flag 开关value
    */
-  changePageSwitchStatus(state: StorePageSwitch_State, config: {type: TYPE; flag: boolean}): void;
+  changePageSwitchStatus(state: StorePageSwitch_State, config: {type: BTN_TYPE; flag: boolean}): void;
 }

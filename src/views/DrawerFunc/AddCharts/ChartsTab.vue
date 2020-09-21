@@ -4,9 +4,9 @@
 
     <v-tab-item v-for="n in tabTags.length" :key="n">
       <keep-alive>
-        <v-container fluid style="width: 100%;height: 600px;overflow-y: scroll">
+        <v-container fluid style="width: 100%;height: 600px;overflow-y: auto">
           <v-row>
-            <v-col v-for="item in tabActiveExampleList" :key="item.title" cols="12" md="4">
+            <v-col v-for="item in tabActiveExampleList" :key="item.title" cols="12" md="4" transition="slide-x-transition">
               <ChartCard :info="item" />
             </v-col>
           </v-row>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from '@/utils/index';
+import {Component, Vue} from 'vue-property-decorator';
 import ChartCard from '@/components/ChartCard.vue';
 
 import {namespace} from 'vuex-class';
@@ -50,21 +50,38 @@ export default class ChartsTab extends Vue {
   /**
    * 当前展示事例
    */
-  public get tabActiveExampleList(): Example[] {
-    return (this.exampleList as Example[]).filter((item: Example) => {
-      return item.tabType === this.tabActiveTag;
-    });
-  }
+  public tabActiveExampleList: Example[] = [];
+
+  /**
+   * 依次渲染时间
+   */
+  readonly RENDER_SECONDS: number = 500;
+
+  // /**
+  //  * 当前展示事例
+  //  */
+  // public get tabActiveExampleList(): Example[] {
+  //   return (this.exampleList as Example[]).filter((item: Example) => {
+  //     return item.tabType === this.tabActiveTag;
+  //   });
+  // }
 
   /**
    * tab变化回调
    * @param idx 下标
    */
   public tabChangeHandle(idx: number) {
-    // setTimeout解决charts无法正常显示
-    setTimeout(() => {
-      this.tabActiveTag = (this.tabTags as TabTag[])[idx].value;
-    }, 0);
+    this.tabActiveExampleList = [];
+    this.tabActiveTag = (this.tabTags as TabTag[])[idx].value;
+    const arr = (this.exampleList as Example[]).filter((item: Example) => {
+      return item.tabType === this.tabActiveTag;
+    });
+    const sArr = arr.map((item, idx) => idx * this.RENDER_SECONDS);
+    for (const i of sArr) {
+      setTimeout(() => {
+        this.tabActiveExampleList.push(arr[i / this.RENDER_SECONDS]);
+      }, i);
+    }
   }
 }
 </script>

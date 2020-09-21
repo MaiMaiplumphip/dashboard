@@ -1,7 +1,7 @@
 /**
  * echarts自适应父盒子大小
  */
-export const EleResize = {
+export const EleResize: any = {
   _handleResize: function(e) {
     var ele = e.target || e.srcElement;
     var trigger = ele.__resizeTrigger__;
@@ -18,7 +18,7 @@ export const EleResize = {
       }
     }
   },
-  _removeHandler: function(ele, handler, context) {
+  _removeHandler: function(ele: any, handler: any, context: any) {
     var handlers = ele.__z_resizeListeners;
     if (handlers) {
       var size = handlers.length;
@@ -45,9 +45,9 @@ export const EleResize = {
     this.contentDocument.defaultView.addEventListener('resize', EleResize._handleResize);
   },
 };
-if (document.attachEvent) {
+if ((document as any).attachEvent) {
   // ie9-10
-  EleResize.on = function(ele, handler, context) {
+  EleResize.on = function(ele: any, handler: any, context: any) {
     var handlers = ele.__z_resizeListeners;
     if (!handlers) {
       handlers = [];
@@ -60,7 +60,7 @@ if (document.attachEvent) {
       context: context,
     });
   };
-  EleResize.off = function(ele, handler, context) {
+  EleResize.off = function(ele: any, handler: any, context: any) {
     var handlers = ele.__z_resizeListeners;
     if (handlers) {
       EleResize._removeHandler(ele, handler, context);
@@ -71,7 +71,7 @@ if (document.attachEvent) {
     }
   };
 } else {
-  EleResize.on = function(ele, handler, context) {
+  EleResize.on = function(ele: any, handler: any, context: any) {
     var handlers = ele.__z_resizeListeners;
     if (!handlers) {
       handlers = [];
@@ -89,7 +89,7 @@ if (document.attachEvent) {
       context: context,
     });
   };
-  EleResize.off = function(ele, handler, context) {
+  EleResize.off = function(ele: any, handler: any, context: any) {
     var handlers = ele.__z_resizeListeners;
     if (handlers) {
       EleResize._removeHandler(ele, handler, context);

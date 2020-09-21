@@ -8,10 +8,12 @@
 
     <v-main>
       <v-container class="fill-height" fluid>
+        <SystemTitle />
         <router-view />
       </v-container>
     </v-main>
 
+    <dv-decoration-2 style="width: 100%;height:5px;" />
     <v-footer v-if="isEdit" app transition="scroll-y-transition">
       <span class="text-caption">© Copyright - 大象慧云信息技术有限公司 All Rights Reserved {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -19,16 +21,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from '@/utils/index';
+import {Component, Vue, Watch} from 'vue-property-decorator';
 import NavigationDrawer from '@/views/Layout/NavigationDrawer/Index.vue';
+import SystemTitle from '@/views/Layout/SystemTitle/Index';
 import {namespace} from 'vuex-class';
+import {getToken} from '@/utils/auth';
+import {getIndicator} from '@/api/Indicator';
 
 const pageSwitchStore = namespace('pageSwitch');
 const layoutStore = namespace('layout');
 
+console.log(`getToken()`, getToken());
+
 @Component({
   components: {
     NavigationDrawer,
+    SystemTitle,
   },
 })
 export default class App extends Vue {
@@ -44,13 +52,17 @@ export default class App extends Vue {
    * 修改状态
    */
   @pageSwitchStore.Action(`setPageSwitchStatus`)
-  public setPageSwitchStatus: any;
+  public setPageSwitchStatus;
 
   @Watch('isEdit')
   watchIsEdit(flag: boolean) {
     if (!flag) {
       console.log('保存了！！');
     }
+  }
+
+  created() {
+    getIndicator({});
   }
 }
 </script>

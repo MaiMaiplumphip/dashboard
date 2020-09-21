@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from '@/utils/index';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import echarts from 'echarts';
 import {EleResize} from '@/utils/resize';
 
@@ -47,6 +47,8 @@ export default class Echarts extends Vue {
         this.mychart = echarts.init(this.$refs.echarts);
         this.resizeDiv = this.$refs.echarts;
         const option = Object.assign({}, this.option);
+
+        // 如果为缩略图模式，则隐藏相关内容
         if (this.isBrief) {
           delete option?.tooltip;
           delete option?.legend;

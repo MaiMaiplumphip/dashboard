@@ -1,10 +1,5 @@
-declare enum RES_CODE {
-  SUCCESS = '0000',
-  ERROR = '9999',
-}
-
 declare interface VUEX_CONTEXT {
-  commit(_type: string, _payload: any, _options?: any): void;
+  commit(mutationsFunc: string, _payload: any, _options?: any): void;
 
   dispatch(_type: any, _payload: any): any;
 
