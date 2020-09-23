@@ -1,18 +1,18 @@
 <template>
-	<div class="ScrollBoardBox">ScrollBoardBox</div>
+	<div class="TaskBox">TaskBox</div>
 </template>
 
 <script lang="ts">
 	import {Component, Prop, Vue} from 'vue-property-decorator';
 
 	@Component
-	export default class ScrollBoard extends Vue {
+	export default class Task extends Vue {
 	}
 </script>
 
 
 <style scoped lang="scss">
-	.ScrollBoardBox {
+	.TaskBox {
 
 	}
 </style>
