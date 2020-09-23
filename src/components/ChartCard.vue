@@ -4,7 +4,7 @@
 
     <v-card-title class="chartCardTitle">{{ info.title }}</v-card-title>
 
-    <v-card-subtitle class="pb-0">{{ info.subtitle }}</v-card-subtitle>
+    <v-card-subtitle class="pb-0" v-if="info.subtitle">{{ info.subtitle }}</v-card-subtitle>
 
     <v-card-text class="text--primary">
       <div>图表介绍： {{ info.introduce }}</div>
@@ -102,7 +102,7 @@ export default class Card extends Vue {
       borderType: this.borderItemValue,
       componentType: this.info?.componentType,
       echartId: this.info?.echartId,
-      data: this.info?.option,
+      data: this.info?.componentType !== 'v-echarts' ? this.info?.option : {},
     };
     console.log(param);
     this.addLayoutItem(param);

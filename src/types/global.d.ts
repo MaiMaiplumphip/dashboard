@@ -19,3 +19,9 @@ declare interface VUEX_CONTEXT {
 
   watch(getter: any, cb: any, options: any): any;
 }
+
+declare interface RESPONSE {
+  code: 200 | 500;
+  msg: string;
+  data: any;
+}

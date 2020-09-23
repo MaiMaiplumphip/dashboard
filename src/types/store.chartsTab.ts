@@ -1,12 +1,12 @@
 /**
  * 组件类型
  */
-type COMPONENT_TYPE = 'v-echarts' | 'v-scroll-board' | 'v-indicator';
+type COMPONENT_TYPE = 'v-echarts' | 'v-scroll-board' | 'v-indicator' | 'v-log' | 'v-capsule' | 'v-task';
 
 /**
  * 图表Tab类型
  */
-type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb';
+type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb' | 'rz' | 'jn' | 'rw';
 
 interface TabTag {
   label: string;

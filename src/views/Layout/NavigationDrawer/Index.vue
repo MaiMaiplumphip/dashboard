@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="flag" app clipped :right="true" width="150">
       <v-list dense>
         <AddChart />
-        <SystemConfig />
+        <!--        <SystemConfig />-->
       </v-list>
     </v-navigation-drawer>
   </div>

@@ -57,6 +57,11 @@ export default class ChartsTab extends Vue {
    */
   readonly RENDER_SECONDS: number = 500;
 
+  /**
+   * 定时器
+   */
+  public timer = null;
+
   // /**
   //  * 当前展示事例
   //  */
@@ -72,13 +77,14 @@ export default class ChartsTab extends Vue {
    */
   public tabChangeHandle(idx: number) {
     this.tabActiveExampleList = [];
+    clearTimeout(this.timer);
     this.tabActiveTag = (this.tabTags as TabTag[])[idx].value;
     const arr = (this.exampleList as Example[]).filter((item: Example) => {
       return item.tabType === this.tabActiveTag;
     });
     const sArr = arr.map((item, idx) => idx * this.RENDER_SECONDS);
     for (const i of sArr) {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.tabActiveExampleList.push(arr[i / this.RENDER_SECONDS]);
       }, i);
     }

@@ -2,6 +2,10 @@
   <v-app id="app">
     <NavigationDrawer :flag="isEdit || false" />
 
+    <!--    <v-btn @click.stop="clickFullscreen" class="screenfullBtn" fab :loading="drawerLoad">-->
+    <!--      <v-icon>mdi-fingerprint</v-icon>-->
+    <!--    </v-btn>-->
+
     <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad">
       <v-icon>{{ !isEdit ? 'mdi-cog' : 'mdi-checkbox-marked-circle' }}</v-icon>
     </v-btn>
@@ -22,16 +26,13 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-property-decorator';
+// import screenfull from 'screenfull';
 import NavigationDrawer from '@/views/Layout/NavigationDrawer/Index.vue';
 import SystemTitle from '@/views/Layout/SystemTitle/Index';
 import {namespace} from 'vuex-class';
-import {getToken} from '@/utils/auth';
-import {getIndicator} from '@/api/Indicator';
 
 const pageSwitchStore = namespace('pageSwitch');
 const layoutStore = namespace('layout');
-
-console.log(`getToken()`, getToken());
 
 @Component({
   components: {
@@ -54,15 +55,32 @@ export default class App extends Vue {
   @pageSwitchStore.Action(`setPageSwitchStatus`)
   public setPageSwitchStatus;
 
+  /**
+   * 获取布局
+   */
+  @layoutStore.Action('reqLayoutItem')
+  public reqLayoutItem;
+
+  /**
+   * 获取布局
+   */
+  @layoutStore.Action('saveLayoutItem')
+  public saveLayoutItem;
+
   @Watch('isEdit')
   watchIsEdit(flag: boolean) {
     if (!flag) {
+      this.saveLayoutItem();
       console.log('保存了！！');
     }
   }
 
+  // public clickFullscreen() {
+  //   screenfull.toggle();
+  // }
+
   created() {
-    getIndicator({});
+    this.reqLayoutItem();
   }
 }
 </script>
@@ -78,5 +96,10 @@ html,body,#app
     position: fixed
     bottom: 20px
     right: 20px
+    z-index: 100
+  .screenfullBtn
+    position: fixed
+    bottom: 20px
+    right: 100px
     z-index: 100
 </style>

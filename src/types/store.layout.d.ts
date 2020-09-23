@@ -35,6 +35,18 @@ declare interface StoreLayout {
 }
 
 declare interface StoreLayout_Actions {
+  /**454
+   * 请求布局列表
+   * @param context
+   */
+  reqLayoutItem(context: VUEX_CONTEXT): void;
+
+  /**
+   * 保存布局列表pl
+   * @param context
+   */
+  saveLayoutItem(context: VUEX_CONTEXT): void;
+
   /**
    * 添加元素
    * @param context
@@ -51,6 +63,18 @@ declare interface StoreLayout_Actions {
 }
 
 declare interface StoreLayout_Mutations {
+  /**
+   * 初始化布局列表
+   * @param state
+   */
+  initLayoutItemList(state: StoreLayout): void;
+
+  /**
+   * 初始化布局列表
+   * @param state
+   */
+  saveLayoutItemList(state: StoreLayout): void;
+
   /**
    * 改变拖拽元素列表
    * @param state

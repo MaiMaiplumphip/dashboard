@@ -33,10 +33,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     if (response.data.code === RES_CODE.SUCCESS) {
-      // 服务端定义的响应code码为0000时请求成功
-      return Promise.resolve(response); // 使用Promise.resolve 正常响应
+      // 服务端定义的响应code码为SUCCESS时请求成功
+      return Promise.resolve(response.data); // 使用Promise.resolve 正常响应
     } else {
-      return Promise.resolve(response);
+      return Promise.resolve(response.data);
     }
   },
   error => {
@@ -60,7 +60,7 @@ instance.interceptors.response.use(
  * @param data 响应结果
  */
 
-export const request = <T>(method: Method, url: string, data: T): any => {
+export const request = <T>(method: Method, url: string, data?: T): any => {
   if (method === 'post') {
     return instance.post(url, data);
   } else if (method === 'get') {

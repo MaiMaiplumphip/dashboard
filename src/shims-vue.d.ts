@@ -3,10 +3,10 @@ declare module '*.vue' {
   export default Vue;
 }
 
-declare module 'vue-grid-layout' {
-  namespace GridLayout {}
-  namespace GridItem {}
-}
+// declare module 'vue-grid-layout' {
+//   namespace GridLayout {}
+//   namespace GridItem {}
+// }
 
 // declare module '@jiaminghi/data-view';
 declare module 'vue-count-to';

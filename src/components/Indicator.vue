@@ -1,12 +1,13 @@
 <template>
   <div class="IndicatorBox">
     <div class="card-panel">
-      <div class="card-panel-icon-wrapper icon-people">
+      <div :class="`card-panel-icon-wrapper dd icon-${option.type}`">
         <svg-icon :icon-class="option.icon" class-name="card-panel-icon" />
       </div>
       <div class="card-panel-description">
         <div class="card-panel-text">{{ option.label }}</div>
-        <CountTo :start-val="0" :end-val="option.value" :duration="2600" class="card-panel-num" />
+        <CountTo :start-val="0" :end-val="value" :duration="2600" class="card-panel-num" />
+        <b>{{ option.unit }}</b>
       </div>
     </div>
   </div>
@@ -15,6 +16,7 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import CountTo from 'vue-count-to';
+import {getHomeTypeAmount} from '@/api/component';
 
 @Component({
   components: {
@@ -25,9 +27,21 @@ export default class Indicator extends Vue {
   @Prop()
   private option?: {
     label: string;
-    value: number;
     icon: string;
+    type: string;
+    unit: string;
   };
+
+  public value = 0;
+
+  private async getCount() {
+    const res = await getHomeTypeAmount(this.option?.type);
+    this.value = res.data;
+  }
+
+  mounted() {
+    this.getCount();
+  }
 }
 </script>
 
@@ -43,45 +57,45 @@ export default class Indicator extends Vue {
     position: relative
     overflow: hidden
     color: #666
-    background: #262626
+    /*background: #262626*/
+    background: linear-gradient(rgba(46,52,63,.4),rgba(68,80,100,.4))
     box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05)
     border-color: rgba(0, 0, 0, 0.05)
-    border-radius: 20px
 
     &:hover
       .card-panel-icon-wrapper
         color: #fff
 
 
-      .icon-people
-        background: #40c9c6
+      .icon-1
+        background: rgba(64,201,198, .6)
 
 
-      .icon-message
-        background: #36a3f7
+      .icon-2
+        background: rgba(54,163,247, .6)
 
 
-      .icon-money
-        background: #f4516c
+      .icon-4
+        background: rgba(244,81,108,.6)
 
 
-      .icon-shopping
-        background: #34bfa3
+      .icon-3
+        background: rgba(	255,165,0,.6)
 
-    .icon-people
+    .icon-1
       color: #40c9c6
 
 
-    .icon-message
+    .icon-2
       color: #36a3f7
 
 
-    .icon-money
+    .icon-4
       color: #f4516c
 
 
-    .icon-shopping
-      color: #34bfa3
+    .icon-3
+      color: #FFA500
 
 
     .card-panel-icon-wrapper
@@ -89,7 +103,7 @@ export default class Indicator extends Vue {
       margin: 14px 0 0 14px
       padding: 16px
       transition: all 0.38s ease-out
-      border-radius: 6px
+      /*border-radius: 6px*/
 
 
     .card-panel-icon

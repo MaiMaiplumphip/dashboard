@@ -10,6 +10,9 @@ import Echarts from '@/components/Echarts';
 import ScrollBoard from '@/components/ScrollBoard';
 import Indicator from '@/components/Indicator';
 import SvgIcon from '@/components/SvgIcon';
+import Log from '@/components/Log.vue';
+import Capsule from '@/components/Capsule.vue';
+import Task from '@/components/Task.vue';
 
 import '@/assets/style/index.sass';
 
@@ -25,6 +28,9 @@ Vue.component('svg-icon', SvgIcon);
 Vue.component('v-echarts', Echarts);
 Vue.component('v-scroll-board', ScrollBoard);
 Vue.component('v-indicator', Indicator);
+Vue.component('v-log', Log);
+Vue.component('v-capsule', Capsule);
+Vue.component('v-task', Task);
 
 new Vue({
   router,

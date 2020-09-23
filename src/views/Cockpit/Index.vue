@@ -19,8 +19,8 @@
             <v-icon dark>mdi-minus</v-icon>
           </v-btn>
         </span>
-        <component :is="item.borderType" style="width: 100%;height: 100%;" class="a" title="13">
-          <component :is="item.componentType" :option="item.componentType === 'v-echarts' ? echartsOption[item.tabType][item.echartId - 1].option : item.option || item.data" />
+        <component :is="item.borderType" style="width: 100%;height: 100%;" class="a" title="">
+          <component :is="item.componentType" :option="item.componentType === 'v-echarts' ? echartsOption[item.tabType][item.echartId - 1].option : item.data" />
         </component>
       </GridItem>
     </GridLayout>
@@ -87,7 +87,6 @@ export default class App extends Vue {
 
   mounted() {
     this.againGive();
-    console.log(this.layoutList);
   }
 }
 </script>
