@@ -84,7 +84,7 @@ export default class App extends Vue {
   // }
 
   created() {
-    // this.reqLayoutItem();
+    this.reqLayoutItem();
     this.flag = getQueryString('gm') === '1';
   }
 }

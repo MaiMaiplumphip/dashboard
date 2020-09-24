@@ -11,6 +11,7 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import {getLog} from '@/api/component';
+import {LOG_REQ_TIME} from '@/global';
 
 @Component
 export default class Log extends Vue {
@@ -29,7 +30,7 @@ export default class Log extends Vue {
     this.getLog();
     this.timer = setInterval(() => {
       this.getLog();
-    }, 1000);
+    }, LOG_REQ_TIME);
   }
 
   destroyed() {

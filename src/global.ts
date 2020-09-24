@@ -6,3 +6,8 @@ export enum RES_CODE {
   ERROR = 500,
   TIMEOUT = 401,
 }
+
+/**
+ * 日志请求时间
+ */
+export const LOG_REQ_TIME: number = 10000;
