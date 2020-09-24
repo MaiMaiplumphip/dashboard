@@ -38,7 +38,7 @@ import BottomSheet from '@/components/BottomSheet.vue';
 export default class NavigationDrawer extends Vue {
   public valid = true;
   public name = '';
-  public nameRules = [v => !!v || '驾驶舱名称为必填项', v => (v && v.length <= 10) || '驾驶舱名称不得超过10个字符'];
+  public nameRules = [(v: any) => !!v || '驾驶舱名称为必填项', (v: any) => (v && v.length <= 10) || '驾驶舱名称不得超过10个字符'];
 
   public checkbox = false;
 

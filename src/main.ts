@@ -6,10 +6,10 @@ import store from './store';
 import vuetify from '@/plugins/vuetify';
 import dataV from '@jiaminghi/data-view';
 
-import Echarts from '@/components/Echarts';
-import ScrollBoard from '@/components/ScrollBoard';
-import Indicator from '@/components/Indicator';
-import SvgIcon from '@/components/SvgIcon';
+import Echarts from '@/components/Echarts.vue';
+import ScrollBoard from '@/components/ScrollBoard.vue';
+import Indicator from '@/components/Indicator.vue';
+import SvgIcon from '@/components/SvgIcon.vue';
 import Log from '@/components/Log.vue';
 import Capsule from '@/components/Capsule.vue';
 import Task from '@/components/Task.vue';
@@ -17,7 +17,7 @@ import Task from '@/components/Task.vue';
 import '@/assets/style/index.sass';
 
 Vue.config.productionTip = true;
-const requireAll = requireContext => requireContext.keys().map(requireContext);
+const requireAll = (requireContext: any) => requireContext.keys().map(requireContext);
 const req = require.context('./assets/icons/svg', false, /\.svg$/);
 requireAll(req);
 

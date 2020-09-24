@@ -158,7 +158,7 @@ const bt_2 = {
             show: true,
             position: 'outside',
             color: '#ddd',
-            formatter: function(params) {
+            formatter: function(params: any) {
               let percent: number | string = 0;
               let total = 0;
               for (var i = 0; i < scaleData.length; i++) {

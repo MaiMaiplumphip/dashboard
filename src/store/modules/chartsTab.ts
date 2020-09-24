@@ -60,7 +60,6 @@ const taskArr: Example[] = [
     taskArr[0].option.children.push(item);
   }
 });
-console.log('taskArr', taskArr);
 const state: StoreChartsTab = {
   tabTags: [
     {value: 'zzt', label: '柱状图'},
@@ -73,12 +72,14 @@ const state: StoreChartsTab = {
     {value: 'rz', label: '日志'},
     {value: 'rw', label: '任务'},
   ],
+  // @ts-ignore
   exampleList: [
     ...Object.keys(examples)
-      .map(item => {
+      .map((item: string): Example[] => {
+        // @ts-ignore
         return examples[item];
       })
-      .reduce((a, b) => {
+      .reduce((a, b): Example[] => {
         return a.concat(b);
       }),
     ...[...indicatorArr, ...scrollBoardArr, ...capsuleArr, ...logArr, ...taskArr],

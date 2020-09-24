@@ -61,7 +61,7 @@ export default class Card extends Vue {
    * 图表添加
    */
   @layoutStore.Action('addLayoutItem')
-  public addLayoutItem;
+  public addLayoutItem: any;
 
   /**
    * 当前图表

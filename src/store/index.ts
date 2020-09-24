@@ -9,6 +9,13 @@ import VuexPersistense from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
+const modules = {
+  chartsTab: chartsTab,
+  pageSwitch: pageSwitch,
+  layout: layout,
+  system: system,
+};
+
 /**
  * 将state存入localStorage
  */
@@ -26,10 +33,6 @@ const vuexLocal = VuexPersistense({
 });
 
 export default new Vuex.Store({
-  modules: {
-    chartsTab,
-    pageSwitch,
-    layout,
-    system,
-  },
+  // @ts-ignore
+  modules,
 });

@@ -139,6 +139,7 @@ const zxt_1 = {
       },
       areaStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(
             0,
             0,
@@ -201,6 +202,7 @@ const zxt_1 = {
       },
       areaStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(
             0,
             0,
@@ -350,6 +352,7 @@ const zxt_2 = {
       },
       areaStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(
             0,
             0,
@@ -394,6 +397,7 @@ const zxt_2 = {
       },
       areaStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(
             0,
             0,
@@ -438,6 +442,7 @@ const zxt_2 = {
       },
       areaStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(
             0,
             0,

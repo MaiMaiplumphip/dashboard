@@ -11,6 +11,8 @@ let instance = axios.create({
   withCredentials: true,
 });
 
+type Method_TYPE = 'form' | Method;
+
 /**
  * 添加配置
  */
@@ -60,7 +62,7 @@ instance.interceptors.response.use(
  * @param data 响应结果
  */
 
-export const request = <T>(method: Method, url: string, data?: T): any => {
+export const request = <T>(method: Method_TYPE, url: string, data?: any): any => {
   if (method === 'post') {
     return instance.post(url, data);
   } else if (method === 'get') {

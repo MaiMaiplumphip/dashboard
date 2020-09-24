@@ -6,7 +6,7 @@
     <!--      <v-icon>mdi-fingerprint</v-icon>-->
     <!--    </v-btn>-->
 
-    <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad">
+    <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad" v-if="flag">
       <v-icon>{{ !isEdit ? 'mdi-cog' : 'mdi-checkbox-marked-circle' }}</v-icon>
     </v-btn>
 
@@ -26,10 +26,12 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-property-decorator';
+import {namespace} from 'vuex-class';
+
 // import screenfull from 'screenfull';
 import NavigationDrawer from '@/views/Layout/NavigationDrawer/Index.vue';
-import SystemTitle from '@/views/Layout/SystemTitle/Index';
-import {namespace} from 'vuex-class';
+import SystemTitle from '@/views/Layout/SystemTitle/Index.vue';
+import {getQueryString} from '@/utils/auth';
 
 const pageSwitchStore = namespace('pageSwitch');
 const layoutStore = namespace('layout');
@@ -53,19 +55,21 @@ export default class App extends Vue {
    * 修改状态
    */
   @pageSwitchStore.Action(`setPageSwitchStatus`)
-  public setPageSwitchStatus;
+  public setPageSwitchStatus: any;
 
   /**
    * 获取布局
    */
   @layoutStore.Action('reqLayoutItem')
-  public reqLayoutItem;
+  public reqLayoutItem: any;
 
   /**
    * 获取布局
    */
   @layoutStore.Action('saveLayoutItem')
-  public saveLayoutItem;
+  public saveLayoutItem: any;
+
+  public flag = false;
 
   @Watch('isEdit')
   watchIsEdit(flag: boolean) {
@@ -80,7 +84,8 @@ export default class App extends Vue {
   // }
 
   created() {
-    this.reqLayoutItem();
+    // this.reqLayoutItem();
+    this.flag = getQueryString('gm') === '1';
   }
 }
 </script>

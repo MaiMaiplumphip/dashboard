@@ -60,7 +60,7 @@ export default class ChartsTab extends Vue {
   /**
    * 定时器
    */
-  public timer = null;
+  public timer: any;
 
   // /**
   //  * 当前展示事例

@@ -19,15 +19,21 @@ export default class ScrollBoard extends Vue {
     title: string;
   };
 
-  public comOption = null;
+  public comOption: {
+    data: [];
+    rowNum: number;
+  } = {
+    data: [],
+    rowNum: 0,
+  };
 
   public async initList() {
     const res: any = await getList(this.option?.url as string);
     let list = [];
     if (this.option?.url.indexOf('task') !== -1) {
-      list = res.data.map(item => [item]);
+      list = res.data.map((item: any) => [item]);
     } else {
-      list = (res.data?.targetTables || res.data?.sourceTables).map(item => [item]);
+      list = (res.data?.targetTables || res.data?.sourceTables).map((item: any) => [item]);
     }
     this.comOption = {
       data: list,

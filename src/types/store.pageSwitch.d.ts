@@ -1,8 +1,8 @@
-type BTN_TYPE = 'isEdit' | 'isAddEchats';
+type BTN_TYPE = 'isEdit' | 'isAddEchats' | string;
 
 declare interface StorePageSwitch_State {
-  isEdit: boolean;
-  isAddEchats: boolean;
+  [isEdit: string]: boolean;
+  [isAddEchats: string]: boolean;
 }
 
 interface StorePageSwitchActions {

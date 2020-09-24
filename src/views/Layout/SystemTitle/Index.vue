@@ -19,7 +19,7 @@ const systemStore = namespace('system');
 @Component
 export default class System extends Vue {
   @systemStore.State('title')
-  private title;
+  private title?: string;
 }
 </script>
 

@@ -28,12 +28,12 @@ export default class Echarts extends Vue {
   /**
    * echarts事例
    */
-  private mychart = null;
+  private mychart: any;
 
   /**
    * 图表node节点
    */
-  private resizeDiv = null;
+  private resizeDiv: any;
 
   /**
    * 初始化图表

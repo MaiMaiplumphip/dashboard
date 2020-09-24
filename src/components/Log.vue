@@ -14,14 +14,14 @@ import {getLog} from '@/api/component';
 
 @Component
 export default class Log extends Vue {
-  public timer = null;
+  public timer: any;
 
   data: string[] = [];
 
   private async getLog() {
     const res = await getLog();
     this.data = res.data;
-    const div = document.getElementById('log');
+    const div: any = document.getElementById('log');
     div.scrollTop = div.scrollHeight;
   }
 

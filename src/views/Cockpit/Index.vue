@@ -39,8 +39,8 @@ const layoutStore = namespace('layout');
 
 @Component({
   components: {
-    GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem,
+    GridLayout: (VueGridLayout as any).GridLayout,
+    GridItem: (VueGridLayout as any).GridItem,
   },
 })
 export default class App extends Vue {
@@ -57,7 +57,7 @@ export default class App extends Vue {
   public layoutItemList?: LayoutItem[];
 
   @layoutStore.Action('removeLayoutItem')
-  private removeLayoutItem;
+  private removeLayoutItem: any;
 
   /**
    * 当前现实元素

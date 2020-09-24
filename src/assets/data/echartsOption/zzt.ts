@@ -134,6 +134,7 @@ const zzt_1 = {
         shadowBlur: 4,
       },
       areaStyle: {
+        // @ts-ignore
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
@@ -153,6 +154,7 @@ const zzt_1 = {
       barWidth: 15,
       itemStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -163,6 +165,7 @@ const zzt_1 = {
               color: 'rgba(61,126,235, 0)',
             },
           ]),
+          // @ts-ignore
           borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
@@ -184,10 +187,12 @@ const zzt_1 = {
       barWidth: 15,
       itemStyle: {
         normal: {
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {offset: 0, color: 'rgba(15,197,243,1)'},
             {offset: 1, color: 'rgba(15,197,243,0)'},
           ]),
+          // @ts-ignore
           borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {offset: 0, color: 'rgba(180,240,255,1)'},
             {offset: 1, color: 'rgba(15,197,243,1)'},
@@ -219,7 +224,7 @@ const zzt_2 = {
     axisPointer: {
       type: 'none',
     },
-    formatter: function(params) {
+    formatter: function(params: any) {
       return params[0].name + ' : ' + params[0].value;
     },
   },
@@ -271,6 +276,7 @@ const zzt_2 = {
       itemStyle: {
         normal: {
           barBorderRadius: 30,
+          // @ts-ignore
           color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
             {
               offset: 0,
@@ -495,6 +501,7 @@ const zzt_3 = {
                 xAxisPoint: api.coord([api.value(0), 0]),
               },
               style: {
+                // @ts-ignore
                 fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
@@ -518,6 +525,7 @@ const zzt_3 = {
                 xAxisPoint: api.coord([api.value(0), 0]),
               },
               style: {
+                // @ts-ignore
                 fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
@@ -541,6 +549,7 @@ const zzt_3 = {
                 xAxisPoint: api.coord([api.value(0), 0]),
               },
               style: {
+                // @ts-ignore
                 fill: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,

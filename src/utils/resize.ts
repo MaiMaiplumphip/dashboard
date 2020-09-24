@@ -2,7 +2,7 @@
  * echarts自适应父盒子大小
  */
 export const EleResize: any = {
-  _handleResize: function(e) {
+  _handleResize: function(e: any) {
     var ele = e.target || e.srcElement;
     var trigger = ele.__resizeTrigger__;
     if (trigger) {
@@ -31,7 +31,7 @@ export const EleResize: any = {
       }
     }
   },
-  _createResizeTrigger: function(ele) {
+  _createResizeTrigger: function(ele: any) {
     var obj = document.createElement('object');
     obj.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden;opacity: 0; pointer-events: none; z-index: -1;');
     obj.onload = EleResize._handleObjectLoad;
@@ -40,7 +40,7 @@ export const EleResize: any = {
     obj.data = 'about:blank';
     return obj;
   },
-  _handleObjectLoad: function(evt) {
+  _handleObjectLoad: function(evt: any) {
     this.contentDocument.defaultView.__resizeTrigger__ = this.__resizeElement__;
     this.contentDocument.defaultView.addEventListener('resize', EleResize._handleResize);
   },
