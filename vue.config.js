@@ -1,4 +1,3 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
@@ -61,7 +60,6 @@ module.exports = {
       chunkFilename: 'assets/[name].[hash:8].css',
     });
     config.plugin('extract-css').use(miniCssExtractPlugin);
-    config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin);
     config.module.rules.delete('svg'); //重点:删除默认配置中处理svg,
     config.module
       .rule('svg')

@@ -69,7 +69,7 @@ export default class App extends Vue {
   @layoutStore.Action('saveLayoutItem')
   public saveLayoutItem: any;
 
-  public flag = false;
+  public flag = true;
 
   @Watch('isEdit')
   watchIsEdit(flag: boolean) {
