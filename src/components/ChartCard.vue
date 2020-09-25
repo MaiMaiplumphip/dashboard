@@ -11,20 +11,20 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-dialog v-model="dialog" persistent max-width="80%">
+      <v-dialog v-model="dialog" persistent max-width="70%">
         <template v-slot:activator="{on, attrs}">
           <v-btn color="orange" text v-bind="attrs" v-on="on">使用</v-btn>
         </template>
-        <v-card style="height: 700px">
+        <v-card>
           <v-card-title class="headline">配置图表</v-card-title>
-          <div class="d-flex">
-            <component :is="borderItemValue" class="borderBox">
+          <div class="d-flex justify-center">
+            <component :is="borderItemValue" class="borderBox mr-2">
               <div class="echartsBox mx-2 pa-4">
                 <component :is="info.componentType" :option="info.option || {}" style="width: 600px" class="cardComponent h100p" />
               </div>
             </component>
 
-            <ChartCreateStep @borderChangeHandle="borderChangeHandleFunc" :dialog="dialog" />
+            <ChartCreateStep @borderChangeHandle="borderChangeHandleFunc" :dialog="dialog" class="ml-11" />
           </div>
 
           <v-card-actions class="d-flex justify-center">

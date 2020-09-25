@@ -3,26 +3,26 @@
     <v-stepper-header>
       <v-stepper-step :complete="e1 > 1" step="1">选择边框</v-stepper-step>
 
-      <v-divider />
+      <!--      <v-divider />-->
 
-      <v-stepper-step :complete="e1 > 2" step="2">选择数据源</v-stepper-step>
+      <!--      <v-stepper-step :complete="e1 > 2" step="2">选择数据源</v-stepper-step>-->
 
-      <v-divider />
+      <!--      <v-divider />-->
 
-      <v-stepper-step step="3">最后一步</v-stepper-step>
+      <!--      <v-stepper-step step="3">最后一步</v-stepper-step>-->
     </v-stepper-header>
 
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-select :items="borderList" item-text="label" item-value="value" label="请选择喜欢的边框" v-model="borderValue" return-object />
 
-        <v-btn color="primary" @click="e1 = 2">
-          下一步
-        </v-btn>
+        <!--        <v-btn color="primary" @click="e1 = 2">-->
+        <!--          下一步-->
+        <!--        </v-btn>-->
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <!--        <div>2</div>-->
+        <v-select :items="[]" item-text="label" item-value="value" label="请选择数据源" v-model="borderValue" return-object />
 
         <v-btn color="primary" @click="e1 = 3">
           下一步

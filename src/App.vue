@@ -6,7 +6,7 @@
     <!--      <v-icon>mdi-fingerprint</v-icon>-->
     <!--    </v-btn>-->
 
-    <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad" v-if="flag">
+    <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad">
       <v-icon>{{ !isEdit ? 'mdi-cog' : 'mdi-checkbox-marked-circle' }}</v-icon>
     </v-btn>
 

@@ -46,6 +46,21 @@ export default class Log extends Vue {
   overflow: scroll
   margin: 0
   background-color: rgba(0,0,0, 0.5)
+  &::-webkit-scrollbar
+    width: 10px
+    height: 10px
+  &::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3)
+    background-color: rgba(0,0,0,0.3)
+    border-radius: 3px
+  &::-webkit-scrollbar-thumb
+    border-radius: 7px
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3)
+    background-color: rgba(15,117,176,.6)
+  &::-webkit-scrollbar-button
+    background-color: cyan
+  &::-webkit-scrollbar-corner
+    background: rgba(0,0,0,0.3)
   ul
     li
       list-style: none
