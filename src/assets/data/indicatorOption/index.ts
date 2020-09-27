@@ -11,6 +11,7 @@ export default [
       icon: 'skill',
       type: '1',
       unit: '张',
+      hasDialog: false,
     },
   },
   {
@@ -25,6 +26,7 @@ export default [
       icon: 'skill',
       type: '2',
       unit: '张',
+      hasDialog: false,
     },
   },
   {
@@ -39,6 +41,7 @@ export default [
       icon: 'time',
       type: '3',
       unit: '项',
+      hasDialog: false,
     },
   },
   {
@@ -53,6 +56,7 @@ export default [
       icon: 'online',
       type: '4',
       unit: '项',
+      hasDialog: true,
     },
   },
 ];

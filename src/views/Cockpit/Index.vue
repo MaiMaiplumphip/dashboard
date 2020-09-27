@@ -15,7 +15,7 @@
     >
       <GridItem v-for="item in layoutList" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" class="gridItemBox">
         <span class="removeBtn" v-if="isEdit" @click="removeLayoutItem(item)">
-          <v-btn class="mx-2" fab dark small color="primary">
+          <v-btn class="mx-2" fab dark x-small color="primary">
             <v-icon dark>mdi-minus</v-icon>
           </v-btn>
         </span>

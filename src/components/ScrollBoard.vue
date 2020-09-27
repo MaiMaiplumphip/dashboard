@@ -31,7 +31,7 @@ export default class ScrollBoard extends Vue {
     const res: any = await getList(this.option?.url as string);
     let list = [];
     if (this.option?.url.indexOf('task') !== -1) {
-      list = res.data.map((item: any) => [item]);
+      list = res.data.taskItems.map((item: any) => [item.taskName]);
     } else {
       list = (res.data?.targetTables || res.data?.sourceTables).map((item: any) => [item]);
     }

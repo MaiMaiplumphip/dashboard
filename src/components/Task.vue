@@ -1,6 +1,5 @@
 <template>
   <div class="TaskBox kanBanComponentBox d-flex flex-column">
-    <!--    <dv-decoration-3 style="width:250px;height:30px;" class="star" />-->
     <div class="title">{{ option.title }}</div>
     <div class="taskList">
       <div class="taskItem" v-for="item in option.children" :key="item.echartId">

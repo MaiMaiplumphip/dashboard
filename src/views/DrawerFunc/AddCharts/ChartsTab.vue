@@ -1,5 +1,5 @@
 <template>
-  <v-tabs class="flex-shrink-1" background-color="dark" color="deep-purple accent-4" right @change="tabChangeHandle">
+  <v-tabs class="flex-shrink-1" background-color="dark" color="success accent-4" right @change="tabChangeHandle">
     <v-tab v-for="item in tabTags" :item="item.value" :key="item.value">{{ item.label }}</v-tab>
 
     <v-tab-item v-for="n in tabTags.length" :key="n">

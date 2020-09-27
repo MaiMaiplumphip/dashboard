@@ -1,22 +1,78 @@
 <template>
   <div class="IndicatorBox">
-    <div class="card-panel">
-      <div :class="`card-panel-icon-wrapper dd icon-${option.type}`">
-        <svg-icon :icon-class="option.icon" class-name="card-panel-icon" />
-      </div>
-      <div class="card-panel-description">
-        <div class="card-panel-text">{{ option.label }}</div>
-        <CountTo :start-val="0" :end-val="value" :duration="2600" class="card-panel-num" />
-        <b>{{ option.unit }}</b>
-      </div>
-    </div>
+    <v-dialog v-model="diaFlag" width="50%">
+      <template v-slot:activator="{on, attrs}">
+        <div class="card-panel">
+          <div :class="`card-panel-icon-wrapper dd icon-${option.type}`" @click="viewList">
+            <svg-icon :icon-class="option.icon" class-name="card-panel-icon" />
+          </div>
+          <div class="card-panel-description">
+            <div class="card-panel-text">{{ option.label }}</div>
+            <CountTo :start-val="0" :end-val="data.length" :duration="2600" class="card-panel-num" />
+            <b>{{ option.unit }}</b>
+          </div>
+        </div>
+      </template>
+      <v-card>
+        <v-card-title class="headline">{{ option.label }}列表</v-card-title>
+        <v-list>
+          <v-list-item-group color="primary">
+            <v-list-item v-for="(item, i) in data" :key="i" @click="viewDetails(item)">
+              <v-list-item-icon>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.name || item.taskName" />
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+        <v-card-text style="text-align: center">
+          <v-btn color="green darken-1" text @click="diaFlag = false">确定</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="detailsDiaFlag" max-width="500px">
+      <v-card>
+        <v-card-title class="headline">
+          详情
+        </v-card-title>
+
+        <v-card-text>
+          <ul>
+            <li v-for="(item, idx) in errorList" :key="idx">
+              任务名称： <span>{{ item.name }}</span
+              >: 错误信息: <span style="color: orangered">{{ item.msg }}</span>
+            </li>
+          </ul>
+        </v-card-text>
+
+        <v-divider />
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="error" text @click="detailsDiaFlag = false">
+            关闭
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="load" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          正在加载
+          <v-progress-linear indeterminate color="white" class="mb-0" />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
 import CountTo from 'vue-count-to';
-import {getHomeTypeAmount} from '@/api/component';
+import {getHomeTypeAmount, getTaskDetail} from '@/api/component';
 
 @Component({
   components: {
@@ -26,17 +82,74 @@ import {getHomeTypeAmount} from '@/api/component';
 export default class Indicator extends Vue {
   @Prop()
   private option?: {
-    label: string;
-    icon: string;
-    type: string;
-    unit: string;
+    label: string; // 文案
+    icon: string; // ico
+    type: string; // 任务类型
+    unit: string; // 显示单位
+    hasDialog: boolean; // 是否含有弹窗
   };
 
+  public data = [];
   public value = 0;
+
+  public diaFlag = false;
+
+  public detailsDiaFlag = false;
+
+  public errorList: any[] = [];
+
+  public load = false;
 
   private async getCount() {
     const res = await getHomeTypeAmount(this.option?.type);
-    this.value = res.data;
+    this.data = res.data;
+  }
+
+  private viewList() {
+    if (this.option?.type === '4') {
+      this.diaFlag = true;
+    } else {
+      this.diaFlag = false;
+    }
+  }
+
+  private async viewDetails(item: any) {
+    if (!(Number.parseInt(this.option?.type as string) > 2)) {
+      return false;
+    }
+
+    this.errorList = [];
+    this.load = true;
+    this.detailsDiaFlag = true;
+
+    const res = await getTaskDetail(item.id);
+    const arr: any[] = [];
+    if (res.data.mappingRunningResults) {
+      res.data.mappingRunningResults.forEach((item: any) => {
+        arr.push({
+          name: item.mappingName,
+          msg: item.errorMsg,
+        });
+      });
+    }
+    if (res.data.pushRunningResult) {
+      res.data.pushRunningResult.forEach((item: any) => {
+        arr.push({
+          name: item.datasourceName,
+          msg: item.errorMsg,
+        });
+      });
+    }
+    if (res.data.syncRunningResult) {
+      res.data.syncRunningResult.forEach((item: any) => {
+        arr.push({
+          name: item.datasourceName,
+          msg: item.errorMsg,
+        });
+      });
+    }
+    this.errorList = arr;
+    this.load = false;
   }
 
   mounted() {

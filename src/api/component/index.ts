@@ -6,7 +6,15 @@ import {request} from '@/utils/request';
  * @description 查询源端数据库表(1)、目标端数据库表(2)、执行任务总量(3)、异常任务(4)
  */
 export const getHomeTypeAmount = (type: string | undefined) => {
-  return request('get', '/dashboard/homePageData/getHomeTypeAmount', {dataType: type});
+  return request('get', '/dashboard/homePageData/getHomeTypeAmountInfo', {dataType: type});
+};
+
+/**
+ * 获取任务id
+ * @param id 任务id
+ */
+export const getTaskDetail = (id: any) => {
+  return request('get', `/dashboard/task/detail/${id}`);
 };
 
 /**

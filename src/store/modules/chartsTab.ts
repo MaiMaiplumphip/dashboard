@@ -7,10 +7,27 @@ const logArr: Example[] = [
     echartId: '1',
     componentType: 'v-log',
     tabType: 'rz',
-    title: '日志',
+    title: '操作日志',
     subtitle: '',
-    introduce: '该图表为实时日志',
-    option: {},
+    introduce: '该图表为操作实时日志',
+    option: {
+      title: '操作日志',
+      type: 'debug',
+      ws: true,
+    },
+  },
+  {
+    echartId: '2',
+    componentType: 'v-log',
+    tabType: 'rz',
+    title: '异常日志',
+    subtitle: '',
+    introduce: '该图表为异常实时日志',
+    option: {
+      title: '异常日志',
+      type: 'error',
+      ws: true,
+    },
   },
 ];
 
