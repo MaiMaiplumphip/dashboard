@@ -64,7 +64,14 @@ export default class Log extends Vue {
       div.scrollTop = div.scrollHeight;
     };
 
-    const wsUrl = `ws://${window.location.host}/log/${this.option?.type}`;
+    let host = '';
+    switch (window.location.host) {
+      case '10.1.1.128:18081':
+        host = '10.1.1.128:18080';
+        break;
+    }
+
+    const wsUrl = `ws://${host}/log/${this.option?.type}`;
 
     const ws = new WebSocket(wsUrl);
 
