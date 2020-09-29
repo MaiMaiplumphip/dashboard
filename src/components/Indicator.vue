@@ -1,18 +1,16 @@
 <template>
   <div class="IndicatorBox">
+    <div class="card-panel" @click="viewList">
+      <div :class="`card-panel-icon-wrapper dd icon-${option.type}`">
+        <svg-icon :icon-class="option.icon" class-name="card-panel-icon" />
+      </div>
+      <div class="card-panel-description">
+        <div class="card-panel-text">{{ option.label }}</div>
+        <CountTo :start-val="0" :end-val="data.length" :duration="2600" class="card-panel-num" />
+        <b>{{ option.unit }}</b>
+      </div>
+    </div>
     <v-dialog v-model="diaFlag" width="50%">
-      <template v-slot:activator="{on, attrs}">
-        <div class="card-panel">
-          <div :class="`card-panel-icon-wrapper dd icon-${option.type}`" @click="viewList">
-            <svg-icon :icon-class="option.icon" class-name="card-panel-icon" />
-          </div>
-          <div class="card-panel-description">
-            <div class="card-panel-text">{{ option.label }}</div>
-            <CountTo :start-val="0" :end-val="data.length" :duration="2600" class="card-panel-num" />
-            <b>{{ option.unit }}</b>
-          </div>
-        </div>
-      </template>
       <v-card>
         <v-card-title class="headline">{{ option.label }}列表</v-card-title>
         <v-list>
