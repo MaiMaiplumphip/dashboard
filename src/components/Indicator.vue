@@ -131,12 +131,19 @@ export default class Indicator extends Vue {
       });
     }
     if (res.data.pushRunningResult) {
-      res.data.pushRunningResult.forEach((item: any) => {
-        arr.push({
-          name: item.datasourceName,
-          msg: item.errorMsg,
+      if (Array.isArray(res.data.pushRunningResult)) {
+        res.data.pushRunningResult.forEach((item: any) => {
+          arr.push({
+            name: item.datasourceName,
+            msg: item.errorMsg,
+          });
         });
-      });
+      } else {
+        arr.push({
+          name: res.data.pushRunningResult.datasourceName,
+          msg: res.data.pushRunningResult.errorMsg,
+        });
+      }
     }
     if (res.data.syncRunningResult) {
       res.data.syncRunningResult.forEach((item: any) => {
@@ -148,6 +155,13 @@ export default class Indicator extends Vue {
     }
     this.errorList = arr;
     this.load = false;
+  }
+
+  @Watch('detailsDiaFlag')
+  watchDetailsDiaFlag(flag: boolean) {
+    if (!flag) {
+      this.load = false;
+    }
   }
 
   mounted() {

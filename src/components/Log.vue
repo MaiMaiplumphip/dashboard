@@ -69,7 +69,7 @@ export default class Log extends Vue {
       case '10.1.1.128:18081':
         host = '10.1.1.128:18080';
         break;
-      case '10.1.1.103:18081':
+      case '10.1.1.103:18082':
         host = '10.1.1.103:18080';
         break;
     }
