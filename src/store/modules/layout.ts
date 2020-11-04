@@ -1,53 +1,56 @@
+import {VuexModule, Module, Mutation, Action, getModule} from 'vuex-module-decorators';
 import {getLayoutItemList, saveLayoutItemList} from '@/api/dashboard';
+import {storeModuleConfig} from '@/utils';
 
-const state: StoreLayout = {
-  layoutItemList: [],
-};
+@Module(storeModuleConfig('layout'))
+export default class Layout extends VuexModule implements StoreLayout {
+  public layoutItemList = [];
 
-const getter = {};
+  @Action
+  public reqLayoutItem() {
+    this.INIT_LAYOUT_ITEM_LIST();
+  }
 
-const actions: StoreLayout_Actions = {
-  reqLayoutItem(context: VUEX_CONTEXT) {
-    context.commit('initLayoutItemList');
-  },
-  saveLayoutItem(context: VUEX_CONTEXT) {
-    context.commit('saveLayoutItemList');
-  },
-  addLayoutItem(context: VUEX_CONTEXT, item: LayoutItem) {
-    context.commit('changeLayoutItemList', {handle: 'ADD', item});
-  },
-  removeLayoutItem(context: VUEX_CONTEXT, item: LayoutItem) {
-    context.commit('changeLayoutItemList', {handle: 'REMOVE', item});
-  },
-};
+  @Action
+  public saveLayoutItem() {
+    this.SAVE_LAYOUT_ITEM_LIST();
+  }
 
-const mutations: StoreLayout_Mutations = {
-  async initLayoutItemList(state: StoreLayout) {
+  @Action
+  public addLayoutItem(item: LayoutItem) {
+    this.CHANGE_LAYOUT_ITEM_LIST({handle: 'ADD', item});
+  }
+
+  @Action
+  public removeLayoutItem(item: LayoutItem) {
+    this.CHANGE_LAYOUT_ITEM_LIST({handle: 'REMOVE', item});
+  }
+
+  @Mutation
+  private async INIT_LAYOUT_ITEM_LIST() {
     const res: RESPONSE = await getLayoutItemList();
-    state.layoutItemList = (res?.data as LayoutItem[]) ?? [];
-  },
-  async saveLayoutItemList(state: StoreLayout) {
-    const res = await saveLayoutItemList(state.layoutItemList);
-  },
-  changeLayoutItemList(state: StoreLayout, param) {
+    this.layoutItemList = (res?.data as LayoutItem[]) ?? [];
+  }
+
+  @Mutation
+  private async SAVE_LAYOUT_ITEM_LIST() {
+    await saveLayoutItemList(this.layoutItemList);
+  }
+
+  @Mutation
+  private CHANGE_LAYOUT_ITEM_LIST(param) {
     const {handle, item} = param;
     switch (handle) {
       case 'ADD':
-        state.layoutItemList.push(param.item);
+        this.layoutItemList.push(param.item);
         break;
       case 'REMOVE':
-        state.layoutItemList = state.layoutItemList.filter(layoutItem => {
+        this.layoutItemList = this.layoutItemList.filter(layoutItem => {
           return item.i !== layoutItem.i;
         });
         break;
     }
-  },
-};
+  }
+}
 
-export default {
-  namespaced: true,
-  state,
-  getter,
-  actions,
-  mutations,
-};
+export const LayoutModule = getModule(Layout);

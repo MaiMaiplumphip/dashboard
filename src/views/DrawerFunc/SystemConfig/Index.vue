@@ -29,6 +29,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import BottomSheet from '@/components/BottomSheet.vue';
+import {SyStemModule} from '@/store/modules/system';
 
 @Component({
   components: {
@@ -36,14 +37,18 @@ import BottomSheet from '@/components/BottomSheet.vue';
   },
 })
 export default class NavigationDrawer extends Vue {
-  public valid = true;
-  public name = '';
-  public nameRules = [(v: any) => !!v || '驾驶舱名称为必填项', (v: any) => (v && v.length <= 10) || '驾驶舱名称不得超过10个字符'];
+  public SyStemModule: StoreSystem = SyStemModule;
 
-  public checkbox = false;
+  public valid = true;
+
+  public name = this.SyStemModule.title;
+
+  public nameRules = [(v: any) => !!v || '驾驶舱名称为必填项', (v: any) => (v && v.length <= 10) || '驾驶舱名称不得超过10个字符'];
 
   public validate() {
     (this.$refs.form as any).validate();
+
+    this.valid = false;
   }
   public reset() {
     (this.$refs.form as any).reset();

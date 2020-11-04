@@ -8,7 +8,7 @@ type COMPONENT_TYPE = 'v-echarts' | 'v-scroll-board' | 'v-indicator' | 'v-log' |
  */
 type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb' | 'rz' | 'jn' | 'rw';
 
-interface TabTag {
+declare interface TabTag {
   label: string;
   value: CHART_TAB_TYPE;
 }
@@ -58,7 +58,13 @@ interface Example {
   style?: any;
 }
 
-interface StoreChartsTab {
+interface StoreChartsTab_State {
   tabTags: TabTag[];
   exampleList?: Example[];
 }
+
+interface StoreChartsTab_Actions {}
+
+interface StoreChartsTab_Mutations {}
+
+declare interface StoreChartsTab extends StoreChartsTab_State, StoreChartsTab_Actions, StoreChartsTab_Mutations {}

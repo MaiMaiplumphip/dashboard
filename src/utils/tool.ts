@@ -29,8 +29,6 @@ export const computeChartsParams = (list?: LayoutItem[]): {x: number; y: number;
   xArr = sort([...new Set(xArr)]);
   yArr = sort([...new Set(yArr)]);
 
-  console.log(xArr);
-  console.log(yArr);
   return {
     x: 0,
     y: 0,

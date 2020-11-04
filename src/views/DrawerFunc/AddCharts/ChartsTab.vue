@@ -1,8 +1,8 @@
 <template>
   <v-tabs class="flex-shrink-1" background-color="dark" color="success accent-4" right @change="tabChangeHandle">
-    <v-tab v-for="item in tabTags" :item="item.value" :key="item.value">{{ item.label }}</v-tab>
+    <v-tab v-for="item in this.ChartsTabModule.tabTags" :item="item.value" :key="item.value">{{ item.label }}</v-tab>
 
-    <v-tab-item v-for="n in tabTags.length" :key="n">
+    <v-tab-item v-for="n in this.ChartsTabModule.tabTags.length" :key="n">
       <keep-alive>
         <v-container fluid style="width: 100%;height: 600px;overflow-y: auto">
           <v-row>
@@ -19,10 +19,7 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import ChartCard from '@/components/ChartCard.vue';
-
-import {namespace} from 'vuex-class';
-
-const ChartsTabStore = namespace('chartsTab');
+import {ChartsTabModule} from '@/store/modules/chartsTab';
 
 @Component({
   components: {
@@ -30,17 +27,7 @@ const ChartsTabStore = namespace('chartsTab');
   },
 })
 export default class ChartsTab extends Vue {
-  /**
-   * tab标签
-   */
-  @ChartsTabStore.State('tabTags')
-  public tabTags?: TabTag[];
-
-  /**
-   * charts示例数据
-   */
-  @ChartsTabStore.State('exampleList')
-  public exampleList?: [];
+  public ChartsTabModule: StoreChartsTab = ChartsTabModule;
 
   /**
    * 当前点击标签
@@ -78,8 +65,8 @@ export default class ChartsTab extends Vue {
   public tabChangeHandle(idx: number) {
     this.tabActiveExampleList = [];
     clearTimeout(this.timer);
-    this.tabActiveTag = (this.tabTags as TabTag[])[idx].value;
-    const arr = (this.exampleList as Example[]).filter((item: Example) => {
+    this.tabActiveTag = (this.ChartsTabModule.tabTags as TabTag[])[idx].value;
+    const arr = (this.ChartsTabModule.exampleList as Example[]).filter((item: Example) => {
       return item.tabType === this.tabActiveTag;
     });
     const sArr = arr.map((item, idx) => idx * this.RENDER_SECONDS);

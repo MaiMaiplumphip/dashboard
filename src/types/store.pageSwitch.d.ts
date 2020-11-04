@@ -1,19 +1,20 @@
 type BTN_TYPE = 'isEdit' | 'isAddEchats' | string;
 
 declare interface StorePageSwitch_State {
-  [isEdit: string]: boolean;
-  [isAddEchats: string]: boolean;
+  isEdit: boolean;
+  isAddEchats: boolean;
 }
 
-interface StorePageSwitchActions {
-  setPageSwitchStatus(context: VUEX_CONTEXT, config: {type: BTN_TYPE; flag: boolean}): void;
+interface StorePageSwitch_Actions {
+  setPageSwitchStatus(config: {type: BTN_TYPE; flag: boolean}): void;
 }
 
-interface StorePageSwitchMutations {
+interface StorePageSwitch_Mutations {
   /**
    * 修改开关状态
-   * @param state store
    * @param config type 开关key flag 开关value
    */
-  changePageSwitchStatus(state: StorePageSwitch_State, config: {type: BTN_TYPE; flag: boolean}): void;
+  CHANGE_PAGE_SWITCH_STATUS(config: {type: BTN_TYPE; flag: boolean}): void;
 }
+
+declare interface StorePageSwitch extends StorePageSwitch_State, StorePageSwitch_Actions, StorePageSwitch_Mutations {}

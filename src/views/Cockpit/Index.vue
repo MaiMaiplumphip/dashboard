@@ -1,11 +1,11 @@
 <template>
   <div class="cockpit" ref="cockpit">
     <GridLayout
-      :layout.sync="layoutItemList"
+      :layout.sync="LayoutModule.layoutItemList"
       :col-num="12"
       :row-height="30"
-      :is-draggable="isEdit"
-      :is-resizable="isEdit"
+      :is-draggable="PageSwitchModule.isEdit"
+      :is-resizable="PageSwitchModule.isEdit"
       :is-mirrored="false"
       :vertical-compact="true"
       :margin="[10, 10]"
@@ -14,13 +14,13 @@
       style="width: 100%;height: 100%"
     >
       <GridItem v-for="item in layoutList" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i" class="gridItemBox">
-        <span class="removeBtn" v-if="isEdit" @click="removeLayoutItem(item)">
+        <span class="removeBtn" v-if="PageSwitchModule.isEdit" @click="LayoutModule.removeLayoutItem(item)">
           <v-btn class="mx-2" fab dark x-small color="primary">
             <v-icon dark>mdi-minus</v-icon>
           </v-btn>
         </span>
         <component :is="item.borderType" style="width: 100%;height: 100%;" class="a" title="">
-          <component :is="item.componentType" :option="item.componentType === 'v-echarts' ? echartsOption[item.tabType][item.echartId - 1].option : item.data" />
+          <component :is="item.componentType" :option="item.componentType === 'v-echarts' ? echartsOption[item.tabType][item.echartId - 1].option : item.data" style="height: 100%;" />
         </component>
       </GridItem>
     </GridLayout>
@@ -30,12 +30,10 @@
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import VueGridLayout from 'vue-grid-layout';
-import {namespace} from 'vuex-class';
 
 import echartsOption from '@/assets/data/echartsOption/index';
-
-const pageSwitchStore = namespace('pageSwitch');
-const layoutStore = namespace('layout');
+import {PageSwitchModule} from '@/store/modules/pageSwitch';
+import {LayoutModule} from '@/store/modules/layout';
 
 @Component({
   components: {
@@ -44,20 +42,8 @@ const layoutStore = namespace('layout');
   },
 })
 export default class App extends Vue {
-  /**
-   * 是否处于修改状态
-   */
-  @pageSwitchStore.State('isEdit')
-  public isEdit?: boolean;
-
-  /**
-   * 驾驶舱元素列表
-   */
-  @layoutStore.State('layoutItemList')
-  public layoutItemList?: LayoutItem[];
-
-  @layoutStore.Action('removeLayoutItem')
-  private removeLayoutItem: any;
+  public PageSwitchModule = PageSwitchModule;
+  public LayoutModule = LayoutModule;
 
   /**
    * 当前现实元素
@@ -73,16 +59,12 @@ export default class App extends Vue {
    * 重新赋值
    */
   private againGive() {
-    this.layoutList = this.layoutItemList as LayoutItem[];
+    this.layoutList = this.LayoutModule.layoutItemList as LayoutItem[];
   }
 
-  @Watch('layoutItemList')
+  @Watch('LayoutModule.layoutItemList')
   watchLayoutItemList() {
     this.againGive();
-  }
-
-  created() {
-    this.$vuetify.theme.dark = true;
   }
 
   mounted() {

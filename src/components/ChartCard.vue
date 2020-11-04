@@ -41,9 +41,7 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import ChartCreateStep from '@/components/ChartCreateStep.vue';
 import {computeChartsParams} from '@/utils/tool';
-import {namespace} from 'vuex-class';
-
-const layoutStore = namespace('layout');
+import {LayoutModule} from '@/store/modules/layout';
 
 @Component({
   components: {
@@ -51,17 +49,7 @@ const layoutStore = namespace('layout');
   },
 })
 export default class Card extends Vue {
-  /**
-   * 示例图表list
-   */
-  @layoutStore.State('layoutItemList')
-  public layoutItemList?: LayoutItem[];
-
-  /**
-   * 图表添加
-   */
-  @layoutStore.Action('addLayoutItem')
-  public addLayoutItem: any;
+  public LayoutModule = LayoutModule;
 
   /**
    * 当前图表
@@ -91,7 +79,7 @@ export default class Card extends Vue {
    * 添加图表至驾驶舱
    */
   public dialogAddHandle() {
-    const {i} = computeChartsParams(this.layoutItemList);
+    const {i} = computeChartsParams(this.LayoutModule.layoutItemList);
     const param: LayoutItem = {
       i,
       x: 0,
@@ -104,8 +92,7 @@ export default class Card extends Vue {
       echartId: this.info?.echartId,
       data: this.info?.componentType !== 'v-echarts' ? this.info?.option : {},
     };
-    console.log(param);
-    this.addLayoutItem(param);
+    this.LayoutModule.addLayoutItem(param);
 
     return this.dialogCloseHandle();
   }

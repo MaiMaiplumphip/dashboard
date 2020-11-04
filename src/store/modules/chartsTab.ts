@@ -1,6 +1,8 @@
+import {VuexModule, Module, Mutation, Action, getModule} from 'vuex-module-decorators';
 import examples from '@/assets/data/echartsOption/index';
 import indicatorArr from '@/assets/data/indicatorOption/index';
 import scrollBoardArr from '@/assets/data/scrollBoardOption/index';
+import {storeModuleConfig} from '@/utils';
 
 const logArr: Example[] = [
   {
@@ -77,8 +79,10 @@ const taskArr: Example[] = [
     taskArr[0].option.children.push(item);
   }
 });
-const state: StoreChartsTab = {
-  tabTags: [
+
+@Module(storeModuleConfig('chartsTab'))
+export default class ChartsTab extends VuexModule implements StoreChartsTab {
+  public tabTags: TabTag[] = [
     {value: 'zzt', label: '柱状图'},
     {value: 'zxt', label: '折线图'},
     {value: 'bt', label: '饼图'},
@@ -88,31 +92,18 @@ const state: StoreChartsTab = {
     {value: 'jn', label: '胶囊图'},
     {value: 'rz', label: '日志'},
     {value: 'rw', label: '任务'},
-  ],
-  // @ts-ignore
-  exampleList: [
+  ];
+
+  public exampleList = [
     ...Object.keys(examples)
       .map((item: string): Example[] => {
-        // @ts-ignore
         return examples[item];
       })
       .reduce((a, b): Example[] => {
         return a.concat(b);
       }),
     ...[...indicatorArr, ...scrollBoardArr, ...capsuleArr, ...logArr, ...taskArr],
-  ],
-};
+  ];
+}
 
-const getter = {};
-
-const actions = {};
-
-const mutations = {};
-
-export default {
-  namespaced: true,
-  state,
-  getter,
-  actions,
-  mutations,
-};
+export const ChartsTabModule = getModule(ChartsTab);

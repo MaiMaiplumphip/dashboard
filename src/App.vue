@@ -1,13 +1,13 @@
 <template>
   <v-app id="app">
-    <NavigationDrawer :flag="isEdit || false" />
+    <NavigationDrawer :flag="PageSwitchModule.isEdit || false" />
 
     <!--    <v-btn @click.stop="clickFullscreen" class="screenfullBtn" fab :loading="drawerLoad">-->
     <!--      <v-icon>mdi-fingerprint</v-icon>-->
     <!--    </v-btn>-->
 
-    <v-btn @click.stop="setPageSwitchStatus({type: 'Edit', flag: !isEdit})" class="settingBtn" fab :loading="drawerLoad">
-      <v-icon>{{ !isEdit ? 'mdi-cog' : 'mdi-checkbox-marked-circle' }}</v-icon>
+    <v-btn @click.stop="PageSwitchModule.setPageSwitchStatus({type: 'Edit', flag: !PageSwitchModule.isEdit})" class="settingBtn" fab :loading="drawerLoad">
+      <v-icon>{{ !PageSwitchModule.isEdit ? 'mdi-cog' : 'mdi-checkbox-marked-circle' }}</v-icon>
     </v-btn>
 
     <v-main>
@@ -18,7 +18,7 @@
     </v-main>
 
     <dv-decoration-2 style="width: 100%;height:5px;" />
-    <v-footer v-if="isEdit" app transition="scroll-y-transition">
+    <v-footer v-if="PageSwitchModule.isEdit" app transition="scroll-y-transition">
       <span class="text-caption">© Copyright - 大象慧云信息技术有限公司 All Rights Reserved {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -26,15 +26,15 @@
 
 <script lang="ts">
 import {Component, Vue, Watch} from 'vue-property-decorator';
-import {namespace} from 'vuex-class';
 
-// import screenfull from 'screenfull';
 import NavigationDrawer from '@/views/Layout/NavigationDrawer/Index.vue';
 import SystemTitle from '@/views/Layout/SystemTitle/Index.vue';
 import {getQueryString} from '@/utils/auth';
+import {PageSwitchModule} from '@/store/modules/pageSwitch';
+import {LayoutModule} from '@/store/modules/layout';
 
-const pageSwitchStore = namespace('pageSwitch');
-const layoutStore = namespace('layout');
+// const pageSwitchStore = namespace('pageSwitch');
+// const layoutStore = namespace('layout');
 
 @Component({
   components: {
@@ -45,46 +45,21 @@ const layoutStore = namespace('layout');
 export default class App extends Vue {
   public drawerLoad = false;
 
-  /**
-   * 是否处于修改状态
-   */
-  @pageSwitchStore.State(`isEdit`)
-  public isEdit?: boolean;
-
-  /**
-   * 修改状态
-   */
-  @pageSwitchStore.Action(`setPageSwitchStatus`)
-  public setPageSwitchStatus: any;
-
-  /**
-   * 获取布局
-   */
-  @layoutStore.Action('reqLayoutItem')
-  public reqLayoutItem: any;
-
-  /**
-   * 获取布局
-   */
-  @layoutStore.Action('saveLayoutItem')
-  public saveLayoutItem: any;
+  public PageSwitchModule: StorePageSwitch = PageSwitchModule;
 
   public flag = true;
 
-  @Watch('isEdit')
+  @Watch('PageSwitchModule.isEdit')
   watchIsEdit(flag: boolean) {
     if (!flag) {
-      this.saveLayoutItem();
-      console.log('保存了！！');
+      LayoutModule.saveLayoutItem();
     }
   }
 
-  // public clickFullscreen() {
-  //   screenfull.toggle();
-  // }
-
   created() {
-    this.reqLayoutItem();
+    this.$vuetify.theme.dark = true;
+
+    LayoutModule.reqLayoutItem();
     this.flag = getQueryString('gm') === '1';
   }
 }

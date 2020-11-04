@@ -1,7 +1,7 @@
 import Vue, {VueConstructor} from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+// import store from './store';
 
 import vuetify from '@/plugins/vuetify';
 import dataV from '@jiaminghi/data-view';
@@ -34,7 +34,7 @@ Vue.component('v-task', Task);
 
 new Vue({
   router,
-  store,
+  // store,
   vuetify,
   render: h => h(App as VueConstructor),
 }).$mount('#app');

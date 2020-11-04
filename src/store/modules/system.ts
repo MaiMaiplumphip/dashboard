@@ -1,17 +1,9 @@
-const state: StoreSystem = {
-  title: '首页数据看板',
-};
+import {VuexModule, Module, Mutation, Action, getModule} from 'vuex-module-decorators';
+import {storeModuleConfig} from '@/utils';
 
-const getter = {};
+@Module(storeModuleConfig('system'))
+export default class System extends VuexModule implements StoreSystem {
+  public title = '首页数据看板';
+}
 
-const actions = {};
-
-const mutations = {};
-
-export default {
-  namespaced: true,
-  state,
-  getter,
-  actions,
-  mutations,
-};
+export const SyStemModule = getModule(System);

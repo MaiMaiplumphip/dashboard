@@ -53,7 +53,7 @@ module.exports = {
   pluginOptions: {
     // 第三方插件配置
   },
-  transpileDependencies: ['vuetify', 'vue-echarts', 'resize-detector'],
+  transpileDependencies: ['vuetify', 'vue-echarts', 'resize-detector', 'vuex-module-decorators'],
   chainWebpack: config => {
     const miniCssExtractPlugin = new MiniCssExtractPlugin({
       filename: 'assets/[name].[hash:8].css',

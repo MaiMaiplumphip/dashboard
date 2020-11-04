@@ -1,5 +1,6 @@
-// interact.js docs http://interactjs.io/docs/#ignorable-selectors
-
+/**
+ * 操作类型
+ */
 type HANDLE_TYPE = 'ADD' | 'REMOVE';
 
 /**
@@ -28,57 +29,50 @@ declare interface LayoutItem {
   resizeIgnoreFrom?: string; // 标识栅格元素中哪些子元素无法触发调整大小的事件，值为css-like选择器。请参考 interact.js docs中的ignoreFrom。
 }
 
-declare interface showLayoutItemList extends LayoutItem {}
-
-declare interface StoreLayout {
+declare interface StoreLayout_State {
   layoutItemList: LayoutItem[];
 }
 
 declare interface StoreLayout_Actions {
-  /**454
+  /**
    * 请求布局列表
-   * @param context
    */
-  reqLayoutItem(context: VUEX_CONTEXT): void;
+  reqLayoutItem(): void;
 
   /**
-   * 保存布局列表pl
-   * @param context
+   * 保存布局列表
    */
-  saveLayoutItem(context: VUEX_CONTEXT): void;
+  saveLayoutItem(): void;
 
   /**
    * 添加元素
-   * @param context
    * @param item
    */
-  addLayoutItem(context: VUEX_CONTEXT, item: LayoutItem): void;
+  addLayoutItem(item: LayoutItem): void;
 
   /**
    * 删除元素
-   * @param context
-   * @param itemId
+   * @param item
    */
-  removeLayoutItem(context: VUEX_CONTEXT, itemId: LayoutItem): void;
+  removeLayoutItem(item: LayoutItem): void;
 }
 
 declare interface StoreLayout_Mutations {
   /**
    * 初始化布局列表
-   * @param state
    */
-  initLayoutItemList(state: StoreLayout): void;
+  INIT_LAYOUT_ITEM_LIST(): Promise<void>;
 
   /**
    * 初始化布局列表
-   * @param state
    */
-  saveLayoutItemList(state: StoreLayout): void;
+  SAVE_LAYOUT_ITEM_LIST(): Promise<void>;
 
   /**
    * 改变拖拽元素列表
-   * @param state
    * @param param handle 操作类型， item，当前操作项
    */
-  changeLayoutItemList(state: StoreLayout, param: {handle: HANDLE_TYPE; item: LayoutItem}): void;
+  CHANGE_LAYOUT_ITEM_LIST(param: {handle: HANDLE_TYPE; item: LayoutItem}): void;
 }
+
+declare interface StoreLayout extends StoreLayout_State, StoreLayout_Actions, StoreLayout_Mutations {}
