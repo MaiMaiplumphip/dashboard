@@ -27,25 +27,27 @@ export default class Layout extends VuexModule implements StoreLayout {
   }
 
   @Mutation
-  private async INIT_LAYOUT_ITEM_LIST() {
+  public async INIT_LAYOUT_ITEM_LIST() {
     const res: RESPONSE = await getLayoutItemList();
+    // @ts-ignore
     this.layoutItemList = (res?.data as LayoutItem[]) ?? [];
   }
 
   @Mutation
-  private async SAVE_LAYOUT_ITEM_LIST() {
+  public async SAVE_LAYOUT_ITEM_LIST() {
     await saveLayoutItemList(this.layoutItemList);
   }
 
   @Mutation
-  private CHANGE_LAYOUT_ITEM_LIST(param) {
+  public CHANGE_LAYOUT_ITEM_LIST(param: {handle: HANDLE_TYPE; item: LayoutItem}) {
     const {handle, item} = param;
     switch (handle) {
       case 'ADD':
-        this.layoutItemList.push(param.item);
+        // @ts-ignore
+        this.layoutItemList.push(item as LayoutItem);
         break;
       case 'REMOVE':
-        this.layoutItemList = this.layoutItemList.filter(layoutItem => {
+        this.layoutItemList = this.layoutItemList.filter((layoutItem: LayoutItem) => {
           return item.i !== layoutItem.i;
         });
         break;

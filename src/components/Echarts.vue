@@ -5,13 +5,11 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import echarts from 'echarts';
+// @ts-ignore
+import china from 'echarts/map/json/china.json'
 import {EleResize} from '@/utils/resize';
 
-@Component({
-  components: {
-    // ECharts,
-  },
-})
+@Component
 export default class Echarts extends Vue {
   /**
    * 图表配置
@@ -40,13 +38,22 @@ export default class Echarts extends Vue {
    */
   public initEcharts() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const that: any = this;
+    const that = this;
     //使用setTimeout异步特性使图标正常加载，这是一位使用拖拽插件导致不能按顺序更新才加定时器，你使用或许不用
     setTimeout(() => {
       this.$nextTick(() => {
-        this.mychart = echarts.init(this.$refs.echarts);
+
+        if (this.option.hasOwnProperty('geo')) {
+          echarts.registerMap('china', china)
+        }
+
+        this.mychart = echarts.init(this.$refs.echarts as HTMLCanvasElement);
         this.resizeDiv = this.$refs.echarts;
         const option = Object.assign({}, this.option);
+
+        console.log('this.option', this.option);
+
+
 
         // 如果为缩略图模式，则隐藏相关内容
         if (this.isBrief) {

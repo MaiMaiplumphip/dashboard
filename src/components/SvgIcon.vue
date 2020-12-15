@@ -9,9 +9,10 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class SvgIcon extends Vue {
-  @Prop()
+  @Prop(String)
   private iconClass?: string;
-  @Prop()
+
+  @Prop(String)
   private className?: string;
 
   private get iconName() {
@@ -26,32 +27,6 @@ export default class SvgIcon extends Vue {
     }
   }
 }
-
-// export default {
-//   name: 'svgIcon',
-//   props: {
-//     iconClass: {
-//       type: String,
-//       required: true,
-//     },
-//     className: {
-//       type: String,
-//       default: '',
-//     },
-//   },
-//   computed: {
-//     iconName() {
-//       return `#icon-${this.iconClass}`;
-//     },
-//     svgClass() {
-//       if (this.className) {
-//         return 'svg-icon ' + this.className;
-//       } else {
-//         return 'svg-icon';
-//       }
-//     },
-//   },
-// };
 </script>
 
 <style scoped lang="sass">

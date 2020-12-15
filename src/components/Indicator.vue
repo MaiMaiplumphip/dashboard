@@ -88,6 +88,7 @@ export default class Indicator extends Vue {
   };
 
   public data = [];
+
   public value = 0;
 
   public diaFlag = false;
@@ -122,6 +123,8 @@ export default class Indicator extends Vue {
 
     const res = await getTaskDetail(item.id);
     const arr: any[] = [];
+
+    // TODO 因接口，待优化
     if (res.data.mappingRunningResults) {
       res.data.mappingRunningResults.forEach((item: any) => {
         arr.push({

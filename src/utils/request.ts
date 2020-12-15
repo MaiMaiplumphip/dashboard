@@ -55,14 +55,15 @@ instance.interceptors.response.use(
   }
 );
 
+// @ts-ignore
 /**
  * 抛出封装的axios
  * @param method
  * @param url
- * @param data 响应结果
+ * @param data?? 响应结果
  */
 
-export const request = <T>(method: Method_TYPE, url: string, data?: any): any => {
+export const request = <URL extends keyof API>(method: Method_TYPE, url: string, data?: API[URL]): Promise<RESPONSE> => {
   if (method === 'post') {
     return instance.post(url, data);
   } else if (method === 'get') {
@@ -72,6 +73,7 @@ export const request = <T>(method: Method_TYPE, url: string, data?: any): any =>
   } else if (method === 'form') {
     const formData = new FormData();
     for (let item in data) {
+      // @ts-ignore
       if (data.hasOwnProperty(item)) {
         formData.append(item, (data as any)[item]);
       }

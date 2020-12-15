@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@jiaminghi/data-view": "^2.9.9",
+    "@types/echarts": "^4.9.0",
     "@types/js-cookie": "^2.2.6",
     "@types/svg-sprite-loader": "^3.9.2",
     "axios": "^0.20.0",

@@ -43,19 +43,21 @@ export default class NavigationDrawer extends Vue {
   /**
    * 标题
    */
-  @Prop()
+  @Prop(String)
   private title!: string;
 
   /**
    * 宽度
    */
-  @Prop()
+  @Prop({
+    default: '80%',
+  })
   private width!: string | number;
 
   /**
    * 是否可以全屏
    */
-  @Prop()
+  @Prop(Boolean)
   private fullscreen!: boolean;
 
   @Watch('sheet')

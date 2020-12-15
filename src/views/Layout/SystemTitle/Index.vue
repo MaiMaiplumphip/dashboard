@@ -16,7 +16,7 @@ import {SyStemModule} from '@/store/modules/system';
 
 @Component
 export default class System extends Vue {
-  public SyStemModule: StoreSystem = SyStemModule;
+  public SyStemModule = SyStemModule;
 }
 </script>
 

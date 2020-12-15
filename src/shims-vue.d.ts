@@ -4,19 +4,8 @@ declare module '*.vue' {
 }
 
 declare module 'vue-grid-layout';
-
 declare module '@jiaminghi/data-view';
 declare module 'vue-count-to';
-
-declare module 'echarts' {
-  function init(dom: any): void;
-
-  namespace graphic {
-    function LinearGradient(a: any, b: any, c: any, d: any, e: any, f?: any): void;
-    function extendShape(option: any);
-    function registerShape(pos: string, options: any);
-  }
-}
 
 declare module '@/utils/index' {
   export class Vue {
@@ -95,45 +84,3 @@ declare module '@/utils/index' {
 
   export function Watch(variableName?: string, options?: any): any;
 }
-
-// declare module 'vuex' {
-//   export class Store {
-//     constructor(options: any);
-//
-//     commit(_type: any, _payload: any, _options?: any): void;
-//
-//     dispatch(_type: any, _payload: any): any;
-//
-//     hasModule(path: any): any;
-//
-//     hotUpdate(newOptions: any): void;
-//
-//     registerModule(path: any, rawModule: any, options: any): void;
-//
-//     replaceState(state: any): void;
-//
-//     subscribe(fn: any, options: any): any;
-//
-//     subscribeAction(fn: any, options: any): any;
-//
-//     unregisterModule(path: any): void;
-//
-//     watch(getter: any, cb: any, options: any): any;
-//   }
-//
-//   export const version: string;
-//
-//   export function createLogger(ref: any): any;
-//
-//   export function createNamespacedHelpers(namespace: any): any;
-//
-//   export function install(_Vue: any): void;
-//
-//   export function mapActions(namespace: any, map: any): any;
-//
-//   export function mapGetters(namespace: any, map: any): any;
-//
-//   export function mapMutations(namespace: any, map: any): any;
-//
-//   export function mapState(namespace: any, map: any): any;
-// }

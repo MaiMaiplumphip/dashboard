@@ -6,7 +6,7 @@ type COMPONENT_TYPE = 'v-echarts' | 'v-scroll-board' | 'v-indicator' | 'v-log' |
 /**
  * 图表Tab类型
  */
-type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb' | 'rz' | 'jn' | 'rw';
+type CHART_TAB_TYPE = 'zzt' | 'zxt' | 'bt' | 'ldt' | 'lb' | 'zb' | 'rz' | 'jn' | 'rw' | 'rlt' | 'dt';
 
 declare interface TabTag {
   label: string;

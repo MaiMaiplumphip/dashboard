@@ -1,4 +1,5 @@
 export {Component, Vue, Prop, Watch, Emit} from 'vue-property-decorator';
+export {VuexModule, Module, Mutation, Action, getModule} from 'vuex-module-decorators';
 import store from '@/store';
 
 /**

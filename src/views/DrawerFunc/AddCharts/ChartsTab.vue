@@ -27,7 +27,7 @@ import {ChartsTabModule} from '@/store/modules/chartsTab';
   },
 })
 export default class ChartsTab extends Vue {
-  public ChartsTabModule: StoreChartsTab = ChartsTabModule;
+  public ChartsTabModule = ChartsTabModule;
 
   /**
    * 当前点击标签
@@ -42,7 +42,7 @@ export default class ChartsTab extends Vue {
   /**
    * 依次渲染时间
    */
-  readonly RENDER_SECONDS: number = 500;
+  readonly RENDER_SECONDS: number = 1;
 
   /**
    * 定时器

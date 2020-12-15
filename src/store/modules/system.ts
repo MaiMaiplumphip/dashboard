@@ -2,7 +2,7 @@ import {VuexModule, Module, Mutation, Action, getModule} from 'vuex-module-decor
 import {storeModuleConfig} from '@/utils';
 
 @Module(storeModuleConfig('system'))
-export default class System extends VuexModule implements StoreSystem {
+export default class System extends VuexModule implements StoreSystem<string> {
   public title = '首页数据看板';
 }
 

@@ -2,13 +2,12 @@
  * 排序
  * @param arr
  */
-function sort<T>(arr: T): T {
+const sort = <T = {}>(arr: T): T =>
   // @ts-ignore
-  return arr.sort(function<T, U>(a: T, b: U) {
+  arr.sort(function<T, U>(a: T, b: U) {
     // @ts-ignore
     return a - b;
   });
-}
 
 /**
  * 计算接下来新添加的拖拽元素i，x，y
@@ -26,12 +25,16 @@ export const computeChartsParams = (list?: LayoutItem[]): {x: number; y: number;
     })
   );
 
-  xArr = sort([...new Set(xArr)]);
-  yArr = sort([...new Set(yArr)]);
+  xArr = sort<number[]>([...new Set(xArr)]);
+  yArr = sort<number[]>([...new Set(yArr)]);
 
   return {
     x: 0,
     y: 0,
     i: iArr.length ? Number.parseInt(iArr[iArr.length - 1]) + 1 + '' : '0',
   };
+};
+
+type Partial<T> = {
+  [P in keyof T]?: T[P];
 };

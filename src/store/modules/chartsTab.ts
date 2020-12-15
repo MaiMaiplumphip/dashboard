@@ -87,6 +87,8 @@ export default class ChartsTab extends VuexModule implements StoreChartsTab {
     {value: 'zxt', label: '折线图'},
     {value: 'bt', label: '饼图'},
     {value: 'ldt', label: '雷达图'},
+    {value: 'rlt', label: '热力图'},
+    {value: 'dt', label: '地图'},
     {value: 'lb', label: '轮播列表'},
     {value: 'zb', label: '指标'},
     {value: 'jn', label: '胶囊图'},
@@ -94,9 +96,11 @@ export default class ChartsTab extends VuexModule implements StoreChartsTab {
     {value: 'rw', label: '任务'},
   ];
 
+  // @ts-ignore
   public exampleList = [
     ...Object.keys(examples)
       .map((item: string): Example[] => {
+        // @ts-ignore
         return examples[item];
       })
       .reduce((a, b): Example[] => {

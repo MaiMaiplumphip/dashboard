@@ -8,13 +8,14 @@ export default class PageSwitch extends VuexModule implements StorePageSwitch {
   public isAddEchats = false;
 
   @Action
-  public setPageSwitchStatus(config) {
+  public setPageSwitchStatus(config: {type: BTN_TYPE; flag: boolean}) {
     this.CHANGE_PAGE_SWITCH_STATUS(config);
   }
 
   @Mutation
-  private CHANGE_PAGE_SWITCH_STATUS(config: {type: BTN_TYPE; flag: boolean}) {
-    this['is' + config.type] = config.flag;
+  public CHANGE_PAGE_SWITCH_STATUS(config: {type: BTN_TYPE; flag: boolean}) {
+    // @ts-ignore
+    this[`is${config.type}` as string] = config.flag;
   }
 }
 

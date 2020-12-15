@@ -1,7 +1,14 @@
 type BTN_TYPE = 'isEdit' | 'isAddEchats' | string;
 
 declare interface StorePageSwitch_State {
+  /**
+   * 是否处于看板修改状态
+   */
   isEdit: boolean;
+
+  /**
+   * 是否处于正在添加图表状态
+   */
   isAddEchats: boolean;
 }
 

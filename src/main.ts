@@ -1,27 +1,22 @@
 import Vue, {VueConstructor} from 'vue';
 import App from './App.vue';
 import router from './router';
-// import store from './store';
+import store from './store';
 
 import vuetify from '@/plugins/vuetify';
 import dataV from '@jiaminghi/data-view';
 
-import Echarts from '@/components/Echarts.vue';
-import ScrollBoard from '@/components/ScrollBoard.vue';
-import Indicator from '@/components/Indicator.vue';
-import SvgIcon from '@/components/SvgIcon.vue';
-import Log from '@/components/Log.vue';
-import Capsule from '@/components/Capsule.vue';
-import Task from '@/components/Task.vue';
+import {Echarts, ScrollBoard, Indicator, SvgIcon, Log, Capsule, Task} from '@/components/index';
 
 import '@/assets/style/index.sass';
 
 Vue.config.productionTip = true;
+
 const requireAll = (requireContext: any) => requireContext.keys().map(requireContext);
 const req = require.context('./assets/icons/svg', false, /\.svg$/);
 requireAll(req);
 
-Vue.use(<any>dataV);
+Vue.use(dataV);
 
 // 注册到全局
 Vue.component('svg-icon', SvgIcon);
@@ -34,7 +29,7 @@ Vue.component('v-task', Task);
 
 new Vue({
   router,
-  // store,
+  store,
   vuetify,
   render: h => h(App as VueConstructor),
 }).$mount('#app');

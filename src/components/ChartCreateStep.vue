@@ -46,7 +46,6 @@
 
 <script lang="ts">
 import {Component, Vue, Emit, Watch, Prop} from 'vue-property-decorator';
-import generateUUID from '@/utils/unique';
 
 @Component
 export default class Card extends Vue {

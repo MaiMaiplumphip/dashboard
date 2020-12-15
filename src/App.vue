@@ -33,9 +33,6 @@ import {getQueryString} from '@/utils/auth';
 import {PageSwitchModule} from '@/store/modules/pageSwitch';
 import {LayoutModule} from '@/store/modules/layout';
 
-// const pageSwitchStore = namespace('pageSwitch');
-// const layoutStore = namespace('layout');
-
 @Component({
   components: {
     NavigationDrawer,

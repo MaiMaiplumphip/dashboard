@@ -37,7 +37,7 @@ import {SyStemModule} from '@/store/modules/system';
   },
 })
 export default class NavigationDrawer extends Vue {
-  public SyStemModule: StoreSystem = SyStemModule;
+  public SyStemModule = SyStemModule;
 
   public valid = true;
 
