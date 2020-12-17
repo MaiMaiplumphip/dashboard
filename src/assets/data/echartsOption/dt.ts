@@ -57,19 +57,6 @@ const dt_1 = {
       }
     },
   },
-  visualMap: {
-    min: 0,
-    max: 100,
-    left: 'left',
-    top: 'bottom',
-    text: ['高', '低'],
-    calculable: false,
-    orient: 'horizontal',
-    inRange: {
-      color: ['#d1f1fe', '#2eb9f5'],
-      symbolSize: [30, 100],
-    },
-  },
   geo: {
     map: 'china',
     zoom: 1.2,
@@ -111,6 +98,59 @@ const dt_1 = {
   ],
 };
 
+const dt_2 = {
+  tooltip: {
+    trigger: 'item',
+    triggerOn: 'mousemove',
+    backgroundColor: 'rgba(0,0,0,.8)',
+    borderColor: '#3574c8',
+    borderWidth: '2',
+    extraCssText: 'padding:10px;box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);',
+    show: true,
+    formatter: function(params: {name: string; data: {taxes: string; companyNum: string}}) {
+      if (params.name) {
+        return params.name + '<br/>' + mapLabel.a + params.data.taxes + +'<br/>' + mapLabel.b + params.data.companyNum;
+      }
+    },
+  },
+  geo: {
+    map: 'china',
+    show: true,
+    roam: false,
+    label: {
+      emphasis: {
+        show: false,
+      },
+    },
+    layoutSize: '100%',
+    itemStyle: {
+      normal: {
+        borderColor: new echarts.graphic.LinearGradient(
+          0,
+          0,
+          0,
+          1,
+          [
+            {
+              offset: 0,
+              color: '#00F6FF',
+            },
+            {
+              offset: 1,
+              color: '#53D9FF',
+            },
+          ],
+          false
+        ),
+        borderWidth: 3,
+        shadowColor: 'rgba(10,76,139,1)',
+        shadowOffsetY: 0,
+        shadowBlur: 60,
+      },
+    },
+  },
+};
+
 const dt: Example[] = [
   {
     echartId: '1',
@@ -120,6 +160,15 @@ const dt: Example[] = [
     subtitle: '暂无',
     introduce: '暂无',
     option: dt_1,
+  },
+  {
+    echartId: '2',
+    componentType: 'v-echarts',
+    tabType: 'dt',
+    title: '地图_2',
+    subtitle: '暂无',
+    introduce: '暂无',
+    option: dt_2,
   },
 ];
 

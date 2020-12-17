@@ -41,7 +41,7 @@ module.exports = {
     hotOnly: false,
     open: true, //配置自动启动浏览器
     proxy: {
-      '/api': {
+      '/sjztapi': {
         target: 'http://10.1.1.128:18080',
         changeOrigin: true,
         pathRewrite: {

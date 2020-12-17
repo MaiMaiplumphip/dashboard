@@ -6,7 +6,7 @@ import {RES_CODE} from '@/global';
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 
 let instance = axios.create({
-  baseURL: '/api',
+  baseURL: '/sjztapi',
   timeout: 10000,
   withCredentials: true,
 });
@@ -55,13 +55,13 @@ instance.interceptors.response.use(
   }
 );
 
-// @ts-ignore
 /**
  * 抛出封装的axios
  * @param method
  * @param url
  * @param data?? 响应结果
  */
+// @ts-ignore
 
 export const request = <URL extends keyof API>(method: Method_TYPE, url: string, data?: API[URL]): Promise<RESPONSE> => {
   if (method === 'post') {
